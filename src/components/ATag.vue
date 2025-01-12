@@ -17,8 +17,5 @@ defineProps({
     <template #prepend>
       <v-icon :color="color">{{ icon }}</v-icon>
     </template>
-    <template #icon>
-      <v-icon :color="color">{{ icon }}</v-icon>
-    </template>
   </v-chip>
 </template>
