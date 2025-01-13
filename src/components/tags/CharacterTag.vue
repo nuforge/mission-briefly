@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import Character from '@/game/character'
 import DepartmentIcon from '@/components/DepartmentIcon.vue';
+import RankPips from '../RankPips.vue';
 
 const openDelay = 500
 
@@ -21,7 +22,7 @@ defineProps({
   color: String,
   size: {
     type: String,
-    default: 'small'
+    default: 'medium'
   }
 })
 
@@ -35,9 +36,10 @@ defineProps({
     <template #default v-if="showName">
       <v-tooltip location="bottom" content-class="bg-background" :open-delay="openDelay">
         <template #activator="{ props }">
-          <v-label v-bind="props">{{ character.name }}</v-label>
+          <v-sheet class="bg-transparent" v-bind="props">{{ character.name }}</v-sheet>
         </template>
-        <v-label>{{ character.name }}</v-label>
+        <v-label>{{ character.name }}</v-label><br />
+        <RankPips v-if="character.rank" :rank="character.rank" :size="`x-small`" />
       </v-tooltip>
     </template>
   </v-chip>

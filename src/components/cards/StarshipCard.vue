@@ -13,18 +13,18 @@ defineProps({
 </script>
 
 <template>
-  <v-card density="compact" class="border-t-md">
-    <v-card-title class="bg-background">
-      <ATag :text="ship.name" icon="mdi-rocket" color="grey" size="x-large" />
-    </v-card-title>
-    <v-chip-group class="bg-background elevation-1 " column>
-      <ATag :text="ship.registry" icon="mdi-label-outline" color="grey" />
-      <ATag :text="ship.type" icon="mdi-label-outline" color="grey" />
+  <v-card density="compact" class="border-t-md bg-background" flat :title="ship.name" :subtitle="ship.registry"
+    prepend-icon="mdi-rocket">
+    <v-divider></v-divider>
+    <v-chip-group class="elevation-1 " column>
+      <ATag :text="ship.registry" icon="mdi-label-variant" color="grey" />
+      <ATag :text="ship.type" icon="mdi-label-variant-outline" color="grey" />
     </v-chip-group>
+    <v-divider></v-divider>
     <v-card-text v-if="ship.hasCrew()">
-      <v-divider><v-label>Crew</v-label></v-divider>
-      <v-chip-group class="bg-background rounded-lg elevation-2 px-2" column>
-        <CharacterTag v-for="crew in ship?.crew" :key="crew.id" :character="crew" />
+      <v-label>Crew</v-label>
+      <v-chip-group class="border-s-md mt-3 rounded-lg elevation-2 px-2" column>
+        <CharacterTag v-for="crew in ship?.crew" :key="crew.id" :character="crew" size="small" />
       </v-chip-group>
     </v-card-text>
     <v-card-text v-else>

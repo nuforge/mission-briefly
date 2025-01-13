@@ -203,9 +203,6 @@ const HeroShip: { [key: string]: Ship } = {
     Object.values(DS9Characters),
   ),
   Voyager: new Ship('USS Voyager', 'Intrepid-class', 'NCC-74656'),
-  Excelsior: new Ship('USS Excelsior', 'Excelsior-class'),
-  Reliant: new Ship('USS Reliant', 'Miranda-class'),
-  Stargazer: new Ship('USS Stargazer', 'Constellation-class'),
 }
 
 const captainsLog = {

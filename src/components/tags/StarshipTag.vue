@@ -17,7 +17,7 @@ defineProps({
   color: String,
   size: {
     type: String,
-    default: 'small'
+    default: 'medium'
   }
 })
 const showClass = ref(true)

@@ -27,10 +27,10 @@ defineProps({
 <template>
   <v-tooltip v-if="rank" :value="rank.title" content-class="bg-background" location="bottom">
     <template #activator="{ props }">
-      <v-label v-bind="props">
+      <v-sheet class="bg-transparent" v-bind="props">
         <v-icon v-for="(pip, index) in rank.getPips()" :key="index" :icon="pip ? icon : `${icon}-outline`" :size="size"
           :color="color" />
-      </v-label>
+      </v-sheet>
     </template>
     {{ rank.name }}
   </v-tooltip>
