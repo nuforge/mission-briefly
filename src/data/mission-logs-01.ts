@@ -4,7 +4,23 @@ import Department from '@/game/department'
 import Rank from '@/game/rank'
 import Mission from '@/game/mission'
 import Ship from '@/game/ship'
+import Role from '@/game/role'
 import Log from '@/game/log'
+
+const starshipRoles = {
+  captain: new Role('Captain', 'Captain', 'mdi-account-circle'),
+  firstOfficer: new Role('First Officer', 'First Officer', 'mdi-account'),
+  chiefMedicalOfficer: new Role('Chief Medical Officer', 'Chief Medical Officer', 'mdi-account'),
+  chiefEngineer: new Role('Chief Engineer', 'Chief Engineer', 'mdi-account'),
+  chiefScienceOfficer: new Role('Chief Science Officer', 'Chief Science Officer', 'mdi-account'),
+  chiefOfSecurity: new Role('Chief of Security', 'Chief of Security', 'mdi-account'),
+  helmsman: new Role('Helmsman', 'Helmsman', 'mdi-account'),
+  tacticalOfficer: new Role('Tactical Officer', 'Tactical Officer', 'mdi-account'),
+  operationsOfficer: new Role('Operations Officer', 'Operations Officer', 'mdi-account'),
+  connOfficer: new Role('Conn Officer', 'Conn Officer', 'mdi-account'),
+  transporterChief: new Role('Transporter Chief', 'Transporter Chief', 'mdi-account'),
+  counselor: new Role('Counselor', 'Counselor', 'mdi-account'),
+}
 
 const galacticSpecies = {
   Human: new Species('Human'),
@@ -39,8 +55,9 @@ const starfleetRanks = {
   Civilian: new Rank('Civilian', 'Civ', 0),
   Ensign: new Rank('Ensign', 'Ens', 1),
   ChiefPettyOfficer: new Rank('Chief Petty Officer', 'CPO', 1),
+  LieutenantJG: new Rank('Lieutenant (Junior Grade)', 'LtJG', 1.5),
   Lieutenant: new Rank('Lieutenant', 'Lt', 2),
-  LieutenantCommander: new Rank('Lieutenant Commander', 'LtCmdr', 1.5),
+  LieutenantCommander: new Rank('Lieutenant Commander', 'LtCmdr', 2.5),
   Commander: new Rank('Commander', 'Cmdr', 3),
   Captain: new Rank('Captain', 'Captain', 4),
   Admiral: new Rank('Admiral', 'Admiral', 6),
@@ -51,7 +68,7 @@ const starfleetDepartments = {
   operations: new Department('Operations', 'yellow-darken-2', 'mdi-cog'),
   science: new Department('Science', 'blue-darken-2', 'mdi-atom'),
   medical: new Department('Medical', 'teal-darken-2', 'mdi-plus-thick'),
-  security: new Department('Security', 'red-darken-2', 'mdi-shield'),
+  security: new Department('Security', 'warning', 'mdi-shield'),
   engineering: new Department('Engineering', 'yellow-darken-2', 'mdi-wrench'),
 }
 
@@ -78,7 +95,7 @@ const TNGCharacters: { [key: string]: Character } = {
     'Katherine Pulaski',
     galacticSpecies['Human'],
     starfleetRanks['Commander'],
-    starfleetDepartments['command'],
+    starfleetDepartments['medical'],
   ),
   Data: new Character(
     'Data',
@@ -175,10 +192,11 @@ const DS9Characters: { [key: string]: Character } = {
 }
 
 const HeroShip: { [key: string]: Ship } = {
+  Enterprise: new Ship('USS Enterprise', 'Galaxy-class', 'NCC-1701-D')
+    .setCrew(Object.values(TNGCharacters))
+    .assignCrew(TNGCharacters['Jean-Luc Picard'], starshipRoles['captain'])
+    .assignCrew(TNGCharacters['William Riker'], starshipRoles['firstOfficer']),
   EnterpriseE: new Ship('USS Enterprise E', 'Sovereign-class', 'NCC-1701-E').setCrew(
-    Object.values(TNGCharacters),
-  ),
-  Enterprise: new Ship('USS Enterprise', 'Galaxy-class', 'NCC-1701-D').setCrew(
     Object.values(TNGCharacters),
   ),
   Defiant: new Ship('USS Defiant', 'Defiant-class', 'NX-74205').setCrew(

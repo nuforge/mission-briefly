@@ -6,6 +6,10 @@ defineProps({
   department: {
     type: Department,
     required: true
+  },
+  size: {
+    type: String,
+    default: 'small'
   }
 })
 
@@ -15,7 +19,7 @@ defineProps({
   <v-tooltip v-if="department" :value="department?.name" content-class="bg-background" location="bottom">
     <template #activator="{ props }">
       <v-label v-bind="props">
-        <v-icon :icon="department?.icon" :color="department?.color" />
+        <v-icon :icon="department?.icon" :color="department?.color" :size="size" />
       </v-label>
     </template>
     {{ department?.name }}

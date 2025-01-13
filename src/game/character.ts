@@ -1,7 +1,7 @@
-import Entity from './entity'
-import Species from './species'
-import Rank from './rank'
-import Department from './department'
+import Entity from '@/game/entity'
+import Species from '@/game/species'
+import Rank from '@/game/rank'
+import Department from '@/game/department'
 
 export default class Character extends Entity {
   protected _species: Species

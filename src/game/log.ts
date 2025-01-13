@@ -1,5 +1,5 @@
-import Character from './character'
-import Mission from './mission'
+import Character from '@/game/character'
+import Mission from '@/game/mission'
 
 interface MissionLog {
   title: string
