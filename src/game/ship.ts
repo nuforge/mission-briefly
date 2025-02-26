@@ -145,14 +145,14 @@ export default class Ship extends Entity {
     this._registry = registry
   }
 
-  // toJSON(): object {
-  //   return {
-  //     ...super.toJSON(),
-  //     registry: this._registry,
-  //     type: this._type,
-  //     crew: this._crew,
-  //   }
-  // }
+  toJSON(): object {
+    return {
+      ...super.toJSON(),
+      registry: this._registry,
+      crew: this._crew,
+      roles: this._roles,
+    }
+  }
 
   // toString(): string {
   //   return this._name

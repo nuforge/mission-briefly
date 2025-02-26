@@ -14,6 +14,7 @@ const vuetify = createVuetify({
     aliases: {
       ...aliases,
       ...aliases_md,
+      menu: 'mdi-menu',
     },
     sets: {
       mdi,

@@ -49,4 +49,12 @@ export default class Role {
     this._color = color
     return this
   }
+
+  toJSON(): object {
+    return {
+      name: this._name,
+      icon: this._icon,
+      color: this._color,
+    }
+  }
 }

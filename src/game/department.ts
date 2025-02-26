@@ -37,4 +37,12 @@ export default class Department {
   public getName(): string {
     return this._name
   }
+
+  toJSON(): object {
+    return {
+      name: this._name,
+      color: this._color,
+      icon: this._icon,
+    }
+  }
 }

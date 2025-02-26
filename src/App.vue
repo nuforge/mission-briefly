@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router'
-import NavigationDrawer from '@/views/NavigationDrawer.vue'
+import NavigationDrawer from '@/components/NavigationDrawer.vue'
+import AppHeader from '@/components/AppHeader.vue'
 </script>
 
 <template>
   <v-responsive>
     <v-app>
+      <AppHeader />
       <NavigationDrawer />
       <v-main class="d-flex ">
         <v-container class="border rounded">

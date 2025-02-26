@@ -64,4 +64,13 @@ export default class Entity {
   static fromEntities(entities: Entity[]): Entity[] {
     return entities.map((entity) => Entity.fromEntity(entity))
   }
+
+  toJSON(): object {
+    return {
+      id: this._id,
+      name: this._name,
+      type: this._type,
+      origin: this._origin,
+    }
+  }
 }

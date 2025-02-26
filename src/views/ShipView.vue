@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
-import { HeroShip } from '@/data/mission-logs-01';
+import HeroStarship from '@/data/heroStarships';
 import Ship from '@/game/ship';
 import StarshipCard from '@/components/cards/StarshipCard.vue';
 
@@ -9,12 +9,12 @@ const route = useRoute();
 
 const routeName = route.params.shipName;
 const shipName = ref<string>(Array.isArray(routeName) ? routeName[0] : routeName);
-const currentShip = ref<Ship | null>(Object.values(HeroShip).find(ship => ship.name === shipName.value) ?? null)
+const currentShip = ref<Ship | null>(Object.values(HeroStarship).find(ship => ship.name === shipName.value) ?? null)
 console.log(shipName.value)
 
 watch(() => route.params.shipName, (newShipName) => {
   shipName.value = Array.isArray(newShipName) ? newShipName[0] : newShipName;
-  currentShip.value = Object.values(HeroShip).find(ship => ship.name === shipName.value) ?? null;
+  currentShip.value = Object.values(HeroStarship).find(ship => ship.name === shipName.value) ?? null;
 });
 
 // If starship is not found, redirect to a not found page or show an error
@@ -42,5 +42,11 @@ if (!currentShip.value) {
     <div v-else>
       <p>Starship not found.</p>
     </div>
+
+    <pre>
+      <code>
+      {{ JSON.stringify(currentShip?.toJSON(), null, 4) }}
+      </code>
+  </pre>
   </div>
 </template>

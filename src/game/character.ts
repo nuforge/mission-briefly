@@ -50,6 +50,15 @@ export default class Character extends Entity {
     return this
   }
 
+  toJSON(): object {
+    return {
+      ...super.toJSON(),
+      species: this._species,
+      rank: this._rank,
+      department: this._department,
+    }
+  }
+
   // static fromJSON(json: object): Character {
   //   return new Character(json['name'], json['species'], json['rank'])
   // }

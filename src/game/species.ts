@@ -52,4 +52,12 @@ export default class Species {
   static fromSpecies(species: Species): Species {
     return new Species(species.name)
   }
+
+  toJSON(): object {
+    return {
+      name: this._name,
+      type: this._type,
+      origin: this._origin,
+    }
+  }
 }
