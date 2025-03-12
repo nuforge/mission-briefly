@@ -36,7 +36,7 @@ const router = createRouter({
       props: true, // Pass the route parameter as a prop
     },
     {
-      path: '/mission/:missionId/:missionTitle',
+      path: '/mission/:missionId',
       name: 'mission',
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route

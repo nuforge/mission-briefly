@@ -1,3 +1,5 @@
+import normalizeString from '@/utils/StringUtils'
+
 export default class Mission {
   protected _id: string
   protected _title: string
@@ -5,13 +7,13 @@ export default class Mission {
   protected _location?: string
   protected _date?: Date
 
-  private generateId(): string {
-    return Math.random().toString(36).substring(2, 11)
+  private generateId(name: string): string {
+    return normalizeString(name)
   }
 
   constructor(title: string, objective: string, location?: string, date?: Date) {
-    this._id = this.generateId()
     this._title = title
+    this._id = this.generateId(this._title)
     this._objective = objective
     this._location = location
     this._date = date || new Date()
@@ -76,6 +78,7 @@ export default class Mission {
   toJSON(): object {
     return {
       id: this._id,
+      name: normalizeString(this._title),
       title: this._title,
       objective: this._objective,
       location: this._location,

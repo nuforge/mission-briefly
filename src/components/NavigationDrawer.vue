@@ -21,8 +21,7 @@ const showCrew = ref(true)
     <v-expand-transition>
       <v-card v-if="showMissions" flat>
         <v-list-item v-for="mission in Missions" :key="mission.title" :title="mission.title"
-          :prepend-icon="'mdi-rocket'" :to="`/mission/${mission.id}/${mission.title.toLowerCase().replace(/ /g, '-')}`"
-          color="primary">
+          :prepend-icon="'mdi-rocket'" :to="`/mission/${mission.id}`" color="primary">
         </v-list-item>
       </v-card>
     </v-expand-transition>
@@ -31,7 +30,7 @@ const showCrew = ref(true)
     <v-expand-transition>
       <v-card v-if="showShips" flat>
         <v-list-item v-for="ship in HeroStarship" :key="ship.name" :title="ship.name" :subtitle="ship.registry"
-          :prepend-icon="'mdi-rocket'" :to="`/ship/${ship.name}`" color="primary">
+          :prepend-icon="'mdi-rocket'" :to="`/ship/${ship.id}`" color="primary">
         </v-list-item>
       </v-card>
     </v-expand-transition>
@@ -40,7 +39,7 @@ const showCrew = ref(true)
     <v-expand-transition>
       <v-card v-if="showCrew" flat>
         <v-list-item v-for="crew in TNGCharacters" :key="crew.id" :title="crew.name" :subtitle="crew?.rank?.name"
-          :prepend-icon="'mdi-account-circle'" :to="`/crew/${crew.name}`" color="primary">
+          :prepend-icon="'mdi-account-circle'" :to="`/crew/${crew.id}`" color="primary">
         </v-list-item>
       </v-card>
     </v-expand-transition>

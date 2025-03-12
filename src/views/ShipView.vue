@@ -5,16 +5,19 @@ import HeroStarship from '@/data/heroStarships';
 import Ship from '@/game/ship';
 import StarshipCard from '@/components/cards/StarshipCard.vue';
 
+const showJSON = ref(false);
+
 const route = useRoute();
-
 const routeName = route.params.shipName;
-const shipName = ref<string>(Array.isArray(routeName) ? routeName[0] : routeName);
-const currentShip = ref<Ship | null>(Object.values(HeroStarship).find(ship => ship.name === shipName.value) ?? null)
-console.log(shipName.value)
 
-watch(() => route.params.shipName, (newShipName) => {
-  shipName.value = Array.isArray(newShipName) ? newShipName[0] : newShipName;
-  currentShip.value = Object.values(HeroStarship).find(ship => ship.name === shipName.value) ?? null;
+const shipName = ref<string>(Array.isArray(routeName) ? routeName[0] : routeName);
+const currentShip = ref<Ship | null>(Object.values(HeroStarship).find(ship => ship.id === shipName.value) ?? null)
+
+
+
+watch(() => route.params.shipName, (newShipId) => {
+  shipName.value = Array.isArray(newShipId) ? newShipId[0] : newShipId;
+  currentShip.value = Object.values(HeroStarship).find(ship => ship.id === shipName.value) ?? null;
 });
 
 // If starship is not found, redirect to a not found page or show an error
@@ -42,11 +45,7 @@ if (!currentShip.value) {
     <div v-else>
       <p>Starship not found.</p>
     </div>
-
-    <pre>
-      <code>
-      {{ JSON.stringify(currentShip?.toJSON(), null, 4) }}
-      </code>
-  </pre>
+    <pre v-if="showJSON"
+      class="bg-surface rounded pa-2 ma-4"><code>{{ JSON.stringify(currentShip?.toJSON(), null, 4) }}</code></pre>
   </div>
 </template>

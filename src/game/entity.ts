@@ -1,16 +1,18 @@
+import normalizeString from '@/utils/StringUtils'
+
 export default class Entity {
   protected _id: string
   protected _name: string
   protected _type: string
   protected _origin: object | string | number | boolean
 
-  private generateId(): string {
-    return Math.random().toString(36).substring(2, 11)
+  private generateId(name: string): string {
+    return normalizeString(name)
   }
 
   constructor(name: string, type?: string, origin?: object) {
-    this._id = this.generateId()
     this._name = name
+    this._id = this.generateId(this._name)
     this._type = type || this.constructor.name
     this._origin = origin || true
     return this
@@ -63,6 +65,10 @@ export default class Entity {
 
   static fromEntities(entities: Entity[]): Entity[] {
     return entities.map((entity) => Entity.fromEntity(entity))
+  }
+
+  static nString(str: string): string {
+    return normalizeString(str)
   }
 
   toJSON(): object {
