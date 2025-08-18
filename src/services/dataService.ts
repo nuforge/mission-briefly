@@ -80,6 +80,176 @@ interface APIResponse<T> {
   timestamp: string
 }
 
+/**
+ * Data validation utilities
+ */
+class DataValidator {
+  /**
+   * Validate character data structure
+   */
+  static validateCharacterData(data: any): data is CharacterData {
+    return (
+      data &&
+      typeof data.id === 'string' &&
+      typeof data.name === 'string' &&
+      data.species &&
+      typeof data.species.name === 'string' &&
+      data.rank &&
+      typeof data.rank.name === 'string' &&
+      data.department &&
+      typeof data.department.name === 'string'
+    )
+  }
+
+  /**
+   * Validate ship data structure
+   */
+  static validateShipData(data: any): data is ShipData {
+    return (
+      data &&
+      typeof data.id === 'string' &&
+      typeof data.name === 'string' &&
+      typeof data.type === 'string' &&
+      typeof data.registry === 'string' &&
+      Array.isArray(data.crew)
+    )
+  }
+
+  /**
+   * Validate mission data structure
+   */
+  static validateMissionData(data: any): data is MissionData {
+    return (
+      data &&
+      typeof data.id === 'string' &&
+      typeof data.title === 'string' &&
+      typeof data.objective === 'string' &&
+      typeof data.location === 'string' &&
+      typeof data.date === 'string'
+    )
+  }
+
+  /**
+   * Validate species data structure
+   */
+  static validateSpeciesData(data: any): data is SpeciesData {
+    return (
+      data &&
+      typeof data.id === 'string' &&
+      typeof data.name === 'string' &&
+      typeof data.type === 'string' &&
+      typeof data.origin === 'string'
+    )
+  }
+
+  /**
+   * Validate department data structure
+   */
+  static validateDepartmentData(data: any): data is DepartmentData {
+    return (
+      data &&
+      typeof data.id === 'string' &&
+      typeof data.name === 'string' &&
+      typeof data.color === 'string' &&
+      typeof data.icon === 'string'
+    )
+  }
+
+  /**
+   * Validate rank data structure
+   */
+  static validateRankData(data: any): data is RankData {
+    return (
+      data &&
+      typeof data.id === 'string' &&
+      typeof data.name === 'string' &&
+      typeof data.title === 'string' &&
+      typeof data.value === 'number'
+    )
+  }
+
+  /**
+   * Validate array of data with a specific validator
+   */
+  static validateArray<T>(
+    data: any[],
+    validator: (item: any) => boolean,
+    itemType: string,
+  ): data is T[] {
+    if (!Array.isArray(data)) {
+      throw new Error(`Expected ${itemType} data to be an array`)
+    }
+
+    const invalidItems: { index: number; item: any; error?: string }[] = []
+
+    data.forEach((item, index) => {
+      try {
+        if (!validator(item)) {
+          invalidItems.push({
+            index,
+            item,
+            error: `Invalid ${itemType} structure`,
+          })
+        }
+      } catch (error) {
+        invalidItems.push({
+          index,
+          item,
+          error: error instanceof Error ? error.message : 'Validation error',
+        })
+      }
+    })
+
+    if (invalidItems.length > 0) {
+      console.warn(`Data validation warnings for ${itemType}:`, {
+        total: data.length,
+        invalid: invalidItems.length,
+        details: invalidItems.slice(0, 5), // Show first 5 for debugging
+      })
+
+      // For now, we'll warn but continue - in production, might want to be stricter
+      if (invalidItems.length === data.length) {
+        throw new Error(`All ${itemType} data is invalid - cannot continue`)
+      }
+    }
+
+    return true
+  }
+
+  /**
+   * Filter out invalid items and return only valid ones
+   */
+  static filterValidItems<T>(
+    data: any[],
+    validator: (item: any) => boolean,
+    itemType: string,
+  ): T[] {
+    if (!Array.isArray(data)) {
+      console.error(`Expected ${itemType} data to be an array, got:`, typeof data)
+      return []
+    }
+
+    const validItems = data.filter((item, index) => {
+      try {
+        const isValid = validator(item)
+        if (!isValid) {
+          console.warn(`Skipping invalid ${itemType} at index ${index}:`, item)
+        }
+        return isValid
+      } catch (error) {
+        console.warn(`Validation error for ${itemType} at index ${index}:`, error)
+        return false
+      }
+    })
+
+    if (validItems.length !== data.length) {
+      console.warn(`Filtered ${itemType} data: ${validItems.length}/${data.length} items are valid`)
+    }
+
+    return validItems
+  }
+}
+
 class DataService {
   private baseUrl: string
   private isLocalMode: boolean
@@ -118,7 +288,12 @@ class DataService {
         departments.find((d) => d.name === char.department.name) ||
         new Department(char.department.name, char.department.color, char.department.icon)
 
-      return new Character(char.name, speciesInstance, rankInstance, departmentInstance)
+      const character = new Character(char.name, speciesInstance, rankInstance, departmentInstance)
+
+      // Override the auto-generated ID with the JSON ID
+      character.overrideId(char.id)
+
+      return character
     })
   }
 
@@ -152,6 +327,9 @@ class DataService {
     return data.map((shipData) => {
       const ship = new Ship(shipData.name, shipData.type, shipData.registry)
 
+      // Override the auto-generated ID with the JSON ID
+      ship.overrideId(shipData.id)
+
       // Add crew members
       const crewMembers = shipData.crew
         .map((charId) => characters.find((c) => c.id === charId))
@@ -169,15 +347,19 @@ class DataService {
    * Transform mission data
    */
   private transformMissionData(data: MissionData[]): Mission[] {
-    return data.map(
-      (missionData) =>
-        new Mission(
-          missionData.title,
-          missionData.objective,
-          missionData.location,
-          new Date(missionData.date),
-        ),
-    )
+    return data.map((missionData) => {
+      const mission = new Mission(
+        missionData.title,
+        missionData.objective,
+        missionData.location,
+        new Date(missionData.date),
+      )
+
+      // Override the auto-generated ID with the JSON ID
+      mission.overrideId(missionData.id)
+
+      return mission
+    })
   }
 
   /**
@@ -341,8 +523,19 @@ class DataService {
 
         const allCharacterData = [...tngResponse.tngCharacters, ...ds9Response.ds9Characters]
 
-        const characters = this.transformCharacterData(
+        // Filter out invalid character data with error recovery
+        const validCharacterData = DataValidator.filterValidItems<CharacterData>(
           allCharacterData,
+          DataValidator.validateCharacterData,
+          'character',
+        )
+
+        if (validCharacterData.length === 0) {
+          throw new Error('No valid character data found')
+        }
+
+        const characters = this.transformCharacterData(
+          validCharacterData,
           speciesResponse.data,
           ranksResponse.data,
           departmentsResponse.data,
@@ -400,7 +593,19 @@ class DataService {
 
       if (this.isLocalMode) {
         const response = await import('@/data/json/ships.json')
-        const ships = this.transformShipData(response.ships as ShipData[], charactersResponse.data)
+
+        // Filter out invalid ship data with error recovery
+        const validShipData = DataValidator.filterValidItems<ShipData>(
+          response.ships,
+          DataValidator.validateShipData,
+          'ship',
+        )
+
+        if (validShipData.length === 0) {
+          throw new Error('No valid ship data found')
+        }
+
+        const ships = this.transformShipData(validShipData, charactersResponse.data)
 
         return {
           data: ships,
@@ -442,7 +647,19 @@ class DataService {
 
       if (this.isLocalMode) {
         const response = await import('@/data/json/missions.json')
-        const missions = this.transformMissionData(response.missions as MissionData[])
+
+        // Filter out invalid mission data with error recovery
+        const validMissionData = DataValidator.filterValidItems<MissionData>(
+          response.missions,
+          DataValidator.validateMissionData,
+          'mission',
+        )
+
+        if (validMissionData.length === 0) {
+          throw new Error('No valid mission data found')
+        }
+
+        const missions = this.transformMissionData(validMissionData)
 
         return {
           data: missions,

@@ -53,6 +53,28 @@ export default class Mission {
     }
   }
 
+  /**
+   * Override the mission ID (used for data loading from JSON)
+   * This allows missions loaded from JSON to maintain their original IDs
+   */
+  overrideId(id: string): void {
+    this.setId(id)
+  }
+
+  /**
+   * Protected method to override ID (used for data migration/loading)
+   */
+  protected setId(id: string): void {
+    try {
+      validateNonEmptyString(id, 'Mission ID')
+      validateMaxLength(id, 100, 'Mission ID')
+      this._id = id
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : String(error)
+      throw new MissionError(`Failed to set ID: ${errorMessage}`, { id })
+    }
+  }
+
   get id(): string {
     return this._id
   }

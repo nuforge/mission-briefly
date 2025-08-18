@@ -7,6 +7,7 @@ import type Species from '@/game/species'
 import type Rank from '@/game/rank'
 import type Department from '@/game/department'
 import { dataService } from '@/services/dataService'
+import { persistenceService } from '@/services/persistenceService'
 
 /**
  * Main game data store - manages all game entities with API-like loading patterns
@@ -22,6 +23,16 @@ export const useGameDataStore = defineStore('gameData', () => {
   const departments = ref<Department[]>([])
   const loading = ref<boolean>(false)
   const error = ref<string | null>(null)
+
+  // Session state - temporary selections that persist during the session
+  const selectedCharacterId = ref<string | null>(
+    persistenceService.getSession('selectedCharacterId') || null,
+  )
+  const selectedShipId = ref<string | null>(persistenceService.getSession('selectedShipId') || null)
+  const selectedMissionId = ref<string | null>(
+    persistenceService.getSession('selectedMissionId') || null,
+  )
+  const currentView = ref<string>(persistenceService.getSession('currentView') || 'dashboard')
 
   // Computed getters
   const getCharacterById = computed(() => {
@@ -230,6 +241,38 @@ export const useGameDataStore = defineStore('gameData', () => {
     }
   }
 
+  // Session state management actions
+  const setSelectedCharacter = (characterId: string | null): void => {
+    selectedCharacterId.value = characterId
+    persistenceService.setSession('selectedCharacterId', characterId)
+  }
+
+  const setSelectedShip = (shipId: string | null): void => {
+    selectedShipId.value = shipId
+    persistenceService.setSession('selectedShipId', shipId)
+  }
+
+  const setSelectedMission = (missionId: string | null): void => {
+    selectedMissionId.value = missionId
+    persistenceService.setSession('selectedMissionId', missionId)
+  }
+
+  const setCurrentView = (view: string): void => {
+    currentView.value = view
+    persistenceService.setSession('currentView', view)
+  }
+
+  const clearSessionState = (): void => {
+    selectedCharacterId.value = null
+    selectedShipId.value = null
+    selectedMissionId.value = null
+    currentView.value = 'dashboard'
+    persistenceService.removeSession('selectedCharacterId')
+    persistenceService.removeSession('selectedShipId')
+    persistenceService.removeSession('selectedMissionId')
+    persistenceService.removeSession('currentView')
+  }
+
   // Statistics and computed data
   const totalCharacters = computed(() => characters.value.length)
   const totalShips = computed(() => ships.value.length)
@@ -248,6 +291,12 @@ export const useGameDataStore = defineStore('gameData', () => {
     departments,
     loading,
     error,
+
+    // Session state
+    selectedCharacterId,
+    selectedShipId,
+    selectedMissionId,
+    currentView,
 
     // Getters
     getCharacterById,
@@ -276,6 +325,13 @@ export const useGameDataStore = defineStore('gameData', () => {
     addMission,
     removeMission,
     updateMission,
+
+    // Session management actions
+    setSelectedCharacter,
+    setSelectedShip,
+    setSelectedMission,
+    setCurrentView,
+    clearSessionState,
 
     // Computed stats
     totalCharacters,

@@ -1,41 +1,45 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue';
-import { useRoute } from 'vue-router';
-import { TNGCharacters } from '@/data/heroCharacters';
-import Character from '@/game/character';
-import CharacterCard from '@/components/cards/CharacterCard.vue';
+import { ref, watch, onMounted } from 'vue'
+import { useRoute } from 'vue-router'
+import { useGameDataStore } from '@/stores/gameData'
+import type Character from '@/game/character'
+import CharacterCard from '@/components/cards/CharacterCard.vue'
 
-const showJSON = ref(false);
+const showJSON = ref(false)
+const gameDataStore = useGameDataStore()
 
-const route = useRoute();
-const routeName = route.params.crewName;
+const route = useRoute()
+const routeName = route.params.crewName
 
-const characterId = ref<string>(Array.isArray(routeName) ? routeName[0] : routeName);
-const currentCharacter = ref<Character | null>(Object.values(TNGCharacters).find(character => character.id === characterId.value) ?? null)
+const characterId = ref<string>(Array.isArray(routeName) ? routeName[0] : routeName)
+const currentCharacter = ref<Character | null>(null)
 
-watch(() => route.params.crewName, (newcharacterId) => {
-  characterId.value = Array.isArray(newcharacterId) ? newcharacterId[0] : newcharacterId;
-  currentCharacter.value = Object.values(TNGCharacters).find(character => character.id === characterId.value) ?? null;
-});
+const findCharacter = () => {
+  const foundCharacter = gameDataStore.getCharacterById(characterId.value)
+  currentCharacter.value = foundCharacter || null
+}
 
-// If character is not found, redirect to a not found page or show an error
-watch(currentCharacter, (newcharacter) => {
-  if (!newcharacter) {
-    console.error('character not found');
+watch(() => route.params.crewName, (newCharacterId) => {
+  characterId.value = Array.isArray(newCharacterId) ? newCharacterId[0] : newCharacterId
+  findCharacter()
+})
+
+// Load data and find character on mount
+onMounted(async () => {
+  if (gameDataStore.characters.length === 0) {
+    await gameDataStore.loadAllData()
+  }
+  findCharacter()
+})
+
+// If character is not found, show error
+watch(currentCharacter, (newCharacter) => {
+  if (!newCharacter) {
+    console.error('Character not found')
     // For example, redirect to a 404 page
     // router.push({ name: 'NotFound' });
   }
-});
-
-// If Character is not found, redirect to a not found page or show an error
-if (!currentCharacter.value) {
-  // You can replace this with your own error handling logic
-  console.error('Character not found');
-  // For example, redirect to a 404 page
-  // router.push({ name: 'NotFound' });
-}
-
-
+})
 
 </script>
 

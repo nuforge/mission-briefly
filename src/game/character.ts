@@ -44,6 +44,14 @@ export default class Character extends Entity {
     return this
   }
 
+  /**
+   * Override the character ID (used for data loading from JSON)
+   * This allows characters loaded from JSON to maintain their original IDs
+   */
+  overrideId(id: string): void {
+    this.setId(id)
+  }
+
   get species(): Species {
     return this._species
   }

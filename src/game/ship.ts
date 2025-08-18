@@ -49,6 +49,14 @@ export default class Ship extends Entity {
     return this
   }
 
+  /**
+   * Override the ship ID (used for data loading from JSON)
+   * This allows ships loaded from JSON to maintain their original IDs
+   */
+  overrideId(id: string): void {
+    this.setId(id)
+  }
+
   sortCrewByRank(desc: boolean = true): Character | undefined {
     try {
       if (!this._crew) return undefined

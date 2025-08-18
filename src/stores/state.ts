@@ -1,30 +1,16 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
+import { persistenceService } from '@/services/persistenceService'
 
 /**
  * Application state store - manages UI state and navigation
  * Separate from game data to handle app-wide state concerns
  */
 export const useStateStore = defineStore('state', () => {
-  // Load initial state from localStorage
-  const getStoredValue = (key: string, defaultValue: any) => {
-    if (typeof window !== 'undefined') {
-      const stored = localStorage.getItem(`mission-briefly-${key}`)
-      return stored ? JSON.parse(stored) : defaultValue
-    }
-    return defaultValue
-  }
-
-  const setStoredValue = (key: string, value: any) => {
-    if (typeof window !== 'undefined') {
-      localStorage.setItem(`mission-briefly-${key}`, JSON.stringify(value))
-    }
-  }
-
   // Navigation state with persistence
-  const navigationDrawer = ref(getStoredValue('navigationDrawer', false))
+  const navigationDrawer = ref(persistenceService.getLocal('navigationDrawer', false))
   const navigationExpanded = ref(
-    getStoredValue('navigationExpanded', {
+    persistenceService.getLocal('navigationExpanded', {
       missions: true,
       ships: true,
       crew: true,
@@ -42,22 +28,24 @@ export const useStateStore = defineStore('state', () => {
   // Navigation actions
   const openDrawer = () => {
     navigationDrawer.value = true
-    setStoredValue('navigationDrawer', true)
+    persistenceService.setLocal('navigationDrawer', true)
   }
 
   const closeDrawer = () => {
     navigationDrawer.value = false
-    setStoredValue('navigationDrawer', false)
+    persistenceService.setLocal('navigationDrawer', false)
   }
 
   const toggleDrawer = () => {
     navigationDrawer.value = !navigationDrawer.value
-    setStoredValue('navigationDrawer', navigationDrawer.value)
+    persistenceService.setLocal('navigationDrawer', navigationDrawer.value)
   }
 
   const toggleNavigationSection = (section: 'missions' | 'ships' | 'crew') => {
-    navigationExpanded.value[section] = !navigationExpanded.value[section]
-    setStoredValue('navigationExpanded', navigationExpanded.value)
+    if (navigationExpanded.value) {
+      navigationExpanded.value[section] = !navigationExpanded.value[section]
+      persistenceService.setLocal('navigationExpanded', navigationExpanded.value)
+    }
   }
 
   // Page state actions

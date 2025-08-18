@@ -68,6 +68,21 @@ export default class Entity {
     return this._origin
   }
 
+  /**
+   * Protected method to override ID (used for data migration/loading)
+   * Only intended for use when loading data from external sources
+   */
+  protected setId(id: string): void {
+    try {
+      validateNonEmptyString(id, 'Entity ID')
+      validateMaxLength(id, 100, 'Entity ID')
+      this._id = id
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : String(error)
+      throw new EntityError(`Failed to set ID: ${errorMessage}`, { id })
+    }
+  }
+
   set name(name: string) {
     try {
       validateNonEmptyString(name, 'Entity name')

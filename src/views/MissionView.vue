@@ -1,30 +1,45 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue';
-import { useRoute } from 'vue-router';
-import { Missions } from '@/data/mission-logs-01'
-import Mission from '@/game/mission'
+import { ref, watch, onMounted } from 'vue'
+import { useRoute } from 'vue-router'
+import { useGameDataStore } from '@/stores/gameData'
+import type Mission from '@/game/mission'
 import MissionCard from '@/components/cards/MissionCard.vue'
 
-const showJSON = ref(false);
+const showJSON = ref(false)
+const gameDataStore = useGameDataStore()
 
-const route = useRoute();
-const routeName = route.params.missionId;
+const route = useRoute()
+const routeName = route.params.missionId
 
-const missionId = ref<string>(Array.isArray(routeName) ? routeName[0] : routeName);
-const currentMission = ref<Mission | null>(Object.values(Missions).find(mission => mission.id === missionId.value) ?? null)
+const missionId = ref<string>(Array.isArray(routeName) ? routeName[0] : routeName)
+const currentMission = ref<Mission | null>(null)
 
-watch(() => route.params.missionId, (routeName) => {
-  const missionId = ref<string>(Array.isArray(routeName) ? routeName[0] : routeName);
-  currentMission.value = Object.values(Missions).find(mission => mission.id === missionId.value) ?? null
-});
-// If character is not found, redirect to a not found page or show an error
+const findMission = () => {
+  const foundMission = gameDataStore.getMissionById(missionId.value)
+  currentMission.value = foundMission || null
+}
+
+watch(() => route.params.missionId, (newMissionId) => {
+  missionId.value = Array.isArray(newMissionId) ? newMissionId[0] : newMissionId
+  findMission()
+})
+
+// Load data and find mission on mount
+onMounted(async () => {
+  if (gameDataStore.missions.length === 0) {
+    await gameDataStore.loadAllData()
+  }
+  findMission()
+})
+
+// If mission is not found, show error
 watch(currentMission, (newMission) => {
   if (!newMission) {
-    console.error('mission not found');
+    console.error('Mission not found')
     // For example, redirect to a 404 page
     // router.push({ name: 'NotFound' });
   }
-});
+})
 </script>
 
 <template>
