@@ -1,11 +1,10 @@
 <script setup lang="ts">
-import useStateStore from '@/stores/state';
-const state = useStateStore();
+import { useStateStore } from '@/stores/state'
+const state = useStateStore()
 
 const toggleDrawer = () => {
-  state.toggleDrawer();
-};
-
+  state.toggleDrawer()
+}
 </script>
 
 <template>
@@ -15,8 +14,15 @@ const toggleDrawer = () => {
     </template>
     <v-app-bar-title>
       <router-link to="/" style="text-decoration: none; color: inherit;">
-        Mission Briefly
+        {{ state.pageTitle }}
       </router-link>
     </v-app-bar-title>
+
+    <!-- Notifications badge -->
+    <template v-slot:append v-if="state.hasNotifications">
+      <v-badge :content="state.notificationCount" color="error">
+        <v-btn icon="mdi-bell" @click="state.clearNotifications"></v-btn>
+      </v-badge>
+    </template>
   </v-app-bar>
 </template>
