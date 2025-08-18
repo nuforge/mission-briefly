@@ -1,6 +1,22 @@
-# mission-briefly
+# Mission Briefly
 
-This template should help get you started developing with Vue 3 in Vite.
+A Star Trek-inspired mission management and fleet coordination system built with Vue 3, TypeScript, and Vuetify.
+
+## 🚀 Project Overview
+
+Mission Briefly simulates Starfleet operations, allowing users to manage characters, coordinate starships, and track missions in the Star Trek universe. The application features a comprehensive character system, fleet management capabilities, and mission logging functionality.
+
+### ✨ Key Features
+
+- **Character Management**: Create and manage Starfleet officers with species, ranks, and department assignments
+- **Fleet Coordination**: Manage starships, assign crew members, and track ship status
+- **Mission System**: Create, assign, and track missions with detailed logging
+- **Interactive UI**: Material Design interface with responsive navigation
+- **Type Safety**: Full TypeScript implementation with comprehensive type checking
+
+### 🎯 Current Status
+
+This project is in active development. See [PROJECT_STATUS.md](./PROJECT_STATUS.md) for detailed project analysis and roadmap.
 
 ## Recommended IDE Setup
 
