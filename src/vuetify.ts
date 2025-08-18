@@ -43,6 +43,7 @@ import {
   VProgressCircular,
   VResponsive,
   VExpandTransition,
+  VBadge,
 } from 'vuetify/components'
 
 // Import only directives we use
@@ -83,6 +84,7 @@ const vuetify = createVuetify({
     VProgressCircular,
     VResponsive,
     VExpandTransition,
+    VBadge,
   },
   directives: {
     Ripple,
