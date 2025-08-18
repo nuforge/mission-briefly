@@ -1,4 +1,16 @@
 import normalizeString from '@/utils/StringUtils'
+import {
+  MissionBrieflyError,
+  validateNonEmptyString,
+  validateRequired,
+  validateMaxLength,
+} from '@/errors'
+
+export class EntityError extends MissionBrieflyError {
+  constructor(message: string, context?: any) {
+    super(message, 'EntityError', context)
+  }
+}
 
 export default class Entity {
   protected _id: string
@@ -7,14 +19,36 @@ export default class Entity {
   protected _origin: object | string | number | boolean
 
   private generateId(name: string): string {
-    return normalizeString(name)
+    try {
+      validateNonEmptyString(name, 'Entity name for ID generation')
+      return normalizeString(name)
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : String(error)
+      throw new EntityError(`Failed to generate ID: ${errorMessage}`, { name })
+    }
   }
 
   constructor(name: string, type?: string, origin?: object) {
-    this._name = name
-    this._id = this.generateId(this._name)
-    this._type = type || this.constructor.name
-    this._origin = origin || true
+    try {
+      validateNonEmptyString(name, 'Entity name')
+      validateMaxLength(name, 100, 'Entity name')
+
+      if (type) {
+        validateNonEmptyString(type, 'Entity type')
+        validateMaxLength(type, 50, 'Entity type')
+      }
+
+      this._name = name
+      this._id = this.generateId(this._name)
+      this._type = type || this.constructor.name
+      this._origin = origin || true
+    } catch (error) {
+      if (error instanceof EntityError) {
+        throw error
+      }
+      const errorMessage = error instanceof Error ? error.message : String(error)
+      throw new EntityError(`Failed to create entity: ${errorMessage}`, { name, type, origin })
+    }
     return this
   }
 
@@ -35,48 +69,159 @@ export default class Entity {
   }
 
   set name(name: string) {
-    this._name = name
+    try {
+      validateNonEmptyString(name, 'Entity name')
+      validateMaxLength(name, 100, 'Entity name')
+
+      this._name = name
+      this._id = this.generateId(this._name) // Regenerate ID when name changes
+    } catch (error) {
+      if (error instanceof EntityError) {
+        throw error
+      }
+      const errorMessage = error instanceof Error ? error.message : String(error)
+      throw new EntityError(`Failed to set name: ${errorMessage}`, { name })
+    }
   }
 
   set type(type: string) {
-    this._type = type
+    try {
+      validateNonEmptyString(type, 'Entity type')
+      validateMaxLength(type, 50, 'Entity type')
+
+      this._type = type
+    } catch (error) {
+      if (error instanceof EntityError) {
+        throw error
+      }
+      const errorMessage = error instanceof Error ? error.message : String(error)
+      throw new EntityError(`Failed to set type: ${errorMessage}`, { type })
+    }
   }
 
   set origin(origin: object) {
-    this._origin = origin
+    try {
+      validateRequired(origin, 'Entity origin')
+
+      this._origin = origin
+    } catch (error) {
+      if (error instanceof EntityError) {
+        throw error
+      }
+      const errorMessage = error instanceof Error ? error.message : String(error)
+      throw new EntityError(`Failed to set origin: ${errorMessage}`, { origin })
+    }
   }
 
   newName(name: string): Entity {
-    this.name = name
-    return this
+    try {
+      this.name = name
+      return this
+    } catch (error) {
+      if (error instanceof EntityError) {
+        throw error
+      }
+      const errorMessage = error instanceof Error ? error.message : String(error)
+      throw new EntityError(`Failed to set new name: ${errorMessage}`, { name })
+    }
   }
+
   newType(type: string): Entity {
-    this.type = type
-    return this
+    try {
+      this.type = type
+      return this
+    } catch (error) {
+      if (error instanceof EntityError) {
+        throw error
+      }
+      const errorMessage = error instanceof Error ? error.message : String(error)
+      throw new EntityError(`Failed to set new type: ${errorMessage}`, { type })
+    }
   }
+
   newOrigin(origin: object): Entity {
-    this.origin = origin
-    return this
+    try {
+      this.origin = origin
+      return this
+    } catch (error) {
+      if (error instanceof EntityError) {
+        throw error
+      }
+      const errorMessage = error instanceof Error ? error.message : String(error)
+      throw new EntityError(`Failed to set new origin: ${errorMessage}`, { origin })
+    }
   }
 
   static fromEntity(entity: Entity): Entity {
-    return new Entity(entity.name, entity.type, entity)
+    try {
+      validateRequired(entity, 'Source entity')
+
+      if (!(entity instanceof Entity)) {
+        throw new EntityError('Source must be an Entity instance')
+      }
+
+      return new Entity(entity.name, entity.type, entity)
+    } catch (error) {
+      if (error instanceof EntityError) {
+        throw error
+      }
+      const errorMessage = error instanceof Error ? error.message : String(error)
+      throw new EntityError(`Failed to create entity from source: ${errorMessage}`, {
+        source: entity?.name,
+      })
+    }
   }
 
   static fromEntities(entities: Entity[]): Entity[] {
-    return entities.map((entity) => Entity.fromEntity(entity))
+    try {
+      validateRequired(entities, 'Entities array')
+
+      if (!Array.isArray(entities)) {
+        throw new EntityError('Input must be an array')
+      }
+
+      entities.forEach((entity, index) => {
+        if (!(entity instanceof Entity)) {
+          throw new EntityError(`Entity at index ${index} must be an Entity instance`)
+        }
+      })
+
+      return entities.map((entity) => Entity.fromEntity(entity))
+    } catch (error) {
+      if (error instanceof EntityError) {
+        throw error
+      }
+      const errorMessage = error instanceof Error ? error.message : String(error)
+      throw new EntityError(`Failed to create entities from array: ${errorMessage}`, {
+        count: entities?.length,
+      })
+    }
   }
 
   static nString(str: string): string {
-    return normalizeString(str)
+    try {
+      validateNonEmptyString(str, 'String to normalize')
+      return normalizeString(str)
+    } catch (error) {
+      if (error instanceof EntityError) {
+        throw error
+      }
+      const errorMessage = error instanceof Error ? error.message : String(error)
+      throw new EntityError(`Failed to normalize string: ${errorMessage}`, { str })
+    }
   }
 
   toJSON(): object {
-    return {
-      id: this._id,
-      name: this._name,
-      type: this._type,
-      origin: this._origin,
+    try {
+      return {
+        id: this._id,
+        name: this._name,
+        type: this._type,
+        origin: this._origin,
+      }
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : String(error)
+      throw new EntityError(`Failed to serialize entity to JSON: ${errorMessage}`)
     }
   }
 }
