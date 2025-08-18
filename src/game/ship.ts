@@ -22,10 +22,10 @@ export default class Ship extends Entity {
 
   sortCrewByRank(desc: boolean = true): Character | undefined {
     if (!this._crew) return undefined
-    const officers = [...this._crew].sort((b, a) => {
-      const rankA = a.rank?.value ?? Number.MAX_SAFE_INTEGER
-      const rankB = b.rank?.value ?? Number.MAX_SAFE_INTEGER
-      return desc ? rankA - rankB : rankB - rankA
+    const officers = [...this._crew].sort((a, b) => {
+      const rankA = a.rank?.value ?? -1 // Use -1 for no rank so they sort to end
+      const rankB = b.rank?.value ?? -1
+      return desc ? rankB - rankA : rankA - rankB // Higher values first for desc
     })
     return officers[0]
   }
@@ -149,8 +149,8 @@ export default class Ship extends Entity {
     return {
       ...super.toJSON(),
       registry: this._registry,
-      crew: this._crew,
-      roles: this._roles,
+      crew: this._crew || [],
+      roles: Object.fromEntries(this._roles),
     }
   }
 
