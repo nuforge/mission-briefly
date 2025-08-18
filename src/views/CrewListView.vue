@@ -119,7 +119,7 @@ onMounted(async () => {
                                 assignments</p>
                         </div>
                     </div>
-                    <v-btn-toggle v-model="viewMode" mandatory variant="outlined">
+                    <v-btn-toggle v-model="viewMode" mandatory>
                         <v-btn value="cards" icon="mdi-view-grid"></v-btn>
                         <v-btn value="table" icon="mdi-table"></v-btn>
                     </v-btn-toggle>
@@ -130,28 +130,28 @@ onMounted(async () => {
         <!-- Personnel Statistics -->
         <v-row class="mb-6">
             <v-col cols="6" sm="3">
-                <v-card variant="outlined" class="text-center pa-4">
+                <v-card class="text-center pa-4">
                     <v-icon size="28" color="primary" class="mb-2">mdi-account-group</v-icon>
                     <div class="text-h4">{{ personnelStats.totalPersonnel }}</div>
                     <div class="text-caption text-medium-emphasis">Total Personnel</div>
                 </v-card>
             </v-col>
             <v-col cols="6" sm="3">
-                <v-card variant="outlined" class="text-center pa-4">
+                <v-card class="text-center pa-4">
                     <v-icon size="28" color="success" class="mb-2">mdi-star-four-points</v-icon>
                     <div class="text-h4">{{ personnelStats.officers }}</div>
                     <div class="text-caption text-medium-emphasis">Officers</div>
                 </v-card>
             </v-col>
             <v-col cols="6" sm="3">
-                <v-card variant="outlined" class="text-center pa-4">
+                <v-card class="text-center pa-4">
                     <v-icon size="28" color="info" class="mb-2">mdi-office-building</v-icon>
                     <div class="text-h4">{{ personnelStats.departments }}</div>
                     <div class="text-caption text-medium-emphasis">Departments</div>
                 </v-card>
             </v-col>
             <v-col cols="6" sm="3">
-                <v-card variant="outlined" class="text-center pa-4">
+                <v-card class="text-center pa-4">
                     <v-icon size="28" color="warning" class="mb-2">mdi-earth</v-icon>
                     <div class="text-h4">{{ personnelStats.species }}</div>
                     <div class="text-caption text-medium-emphasis">Species</div>
@@ -162,26 +162,26 @@ onMounted(async () => {
         <!-- Filters and Search -->
         <v-row class="mb-4">
             <v-col cols="12" md="4">
-                <v-text-field v-model="search" label="Search personnel..." prepend-inner-icon="mdi-magnify"
-                    variant="outlined" hide-details clearable />
+                <v-text-field v-model="search" label="Search personnel..." prepend-inner-icon="mdi-magnify" hide-details
+                    clearable />
             </v-col>
             <v-col cols="12" md="2">
                 <v-select v-model="selectedDepartment"
                     :items="[{ title: 'All Departments', value: 'all' }, ...departments.map(d => ({ title: d, value: d }))]"
-                    label="Department" variant="outlined" hide-details />
+                    label="Department" hide-details />
             </v-col>
             <v-col cols="12" md="2">
                 <v-select v-model="selectedRank"
                     :items="[{ title: 'All Ranks', value: 'all' }, ...ranks.map(r => ({ title: r, value: r }))]"
-                    label="Rank" variant="outlined" hide-details />
+                    label="Rank" hide-details />
             </v-col>
             <v-col cols="12" md="2">
                 <v-select v-model="selectedSpecies"
                     :items="[{ title: 'All Species', value: 'all' }, ...species.map(s => ({ title: s, value: s }))]"
-                    label="Species" variant="outlined" hide-details />
+                    label="Species" hide-details />
             </v-col>
             <v-col cols="12" md="2" class="d-flex align-center">
-                <v-btn variant="outlined" @click="clearFilters" block>
+                <v-btn @click="clearFilters" block>
                     Clear Filters
                 </v-btn>
             </v-col>
@@ -225,7 +225,7 @@ onMounted(async () => {
         <!-- Table View -->
         <v-row v-else-if="filteredCharacters.length > 0 && viewMode === 'table'">
             <v-col cols="12">
-                <v-card variant="outlined">
+                <v-card>
                     <v-data-table :headers="[
                         { title: 'Name', key: 'name' },
                         { title: 'Rank', key: 'rank' },
@@ -255,8 +255,7 @@ onMounted(async () => {
                             </div>
                         </template>
                         <template #item.species="{ item }">
-                            <ATag v-if="item.species" :text="item.species.name" icon="mdi-earth" size="small"
-                                variant="outlined" />
+                            <ATag v-if="item.species" :text="item.species.name" icon="mdi-earth" size="small" />
                         </template>
                     </v-data-table>
                 </v-card>
@@ -266,7 +265,7 @@ onMounted(async () => {
         <!-- Empty State -->
         <v-row v-else>
             <v-col cols="12" class="text-center">
-                <v-card variant="outlined" class="pa-8">
+                <v-card class="pa-8">
                     <v-icon size="64" color="medium-emphasis" class="mb-4">mdi-account-group-outline</v-icon>
                     <h3 class="text-h5 mb-2">No Personnel Found</h3>
                     <p class="text-medium-emphasis mb-4">
@@ -276,7 +275,7 @@ onMounted(async () => {
                     </p>
                     <v-btn
                         v-if="search || selectedDepartment !== 'all' || selectedRank !== 'all' || selectedSpecies !== 'all'"
-                        variant="outlined" @click="clearFilters">
+                        @click="clearFilters">
                         Clear Filters
                     </v-btn>
                 </v-card>
@@ -294,7 +293,7 @@ onMounted(async () => {
     transform: translateY(-2px);
 }
 
-.v-data-table>>>tbody tr {
+.v-data-table :deep(tbody tr) {
     cursor: pointer;
 }
 </style>

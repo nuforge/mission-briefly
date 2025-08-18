@@ -26,7 +26,7 @@ defineProps<Props>()
     <v-card-text>
       <div class="d-flex flex-wrap ga-2 mb-3">
         <ATag :text="ship.type" icon="mdi-ship-wheel" color="blue" variant="tonal" />
-        <ATag :text="ship.registry" icon="mdi-identifier" color="grey" variant="outlined" />
+        <ATag :text="ship.registry" icon="mdi-identifier" color="grey"  />
       </div>
 
       <div v-if="ship.hasCrew()">
@@ -45,3 +45,4 @@ defineProps<Props>()
     </v-card-text>
   </v-card>
 </template>
+

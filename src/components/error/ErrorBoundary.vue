@@ -8,7 +8,7 @@
                     <v-icon :icon="errorIcon" />
                 </template>
                 <template #append>
-                    <v-btn v-if="showRetry" variant="outlined" size="small" @click="retry">
+                    <v-btn v-if="showRetry" size="small" @click="retry">
                         Retry
                     </v-btn>
                     <v-btn v-if="showDetails" variant="text" size="small" @click="toggleDetails">
@@ -18,7 +18,7 @@
             </v-alert>
 
             <v-expand-transition>
-                <v-card v-if="showingDetails && error" class="mt-4 error-details" variant="outlined">
+                <v-card v-if="showingDetails && error" class="mt-4 error-details">
                     <v-card-title class="text-error">
                         Error Details
                     </v-card-title>
@@ -26,10 +26,10 @@
                         <pre class="error-stack">{{ errorDetails }}</pre>
                     </v-card-text>
                     <v-card-actions>
-                        <v-btn variant="outlined" size="small" @click="copyErrorDetails">
+                        <v-btn size="small" @click="copyErrorDetails">
                             Copy Details
                         </v-btn>
-                        <v-btn variant="outlined" size="small" @click="reportError">
+                        <v-btn size="small" @click="reportError">
                             Report Issue
                         </v-btn>
                     </v-card-actions>
@@ -223,7 +223,6 @@ defineExpose({
     overflow-y: auto;
     background-color: rgba(0, 0, 0, 0.05);
     padding: 1rem;
-    border-radius: 4px;
     margin: 0;
 }
 

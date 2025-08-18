@@ -97,11 +97,11 @@ onMounted(async () => {
     <!-- Ship Not Found -->
     <v-row v-else-if="!currentShip">
       <v-col cols="12" class="text-center">
-        <v-card variant="outlined" class="pa-8">
+        <v-card  class="pa-8">
           <v-icon size="64" color="error" class="mb-4">mdi-rocket-outline</v-icon>
           <h3 class="text-h5 mb-2">Ship Not Found</h3>
           <p class="text-medium-emphasis mb-4">The requested starship could not be located in the fleet database.</p>
-          <v-btn variant="outlined" @click="goToFleet">
+          <v-btn  @click="goToFleet">
             <v-icon start>mdi-arrow-left</v-icon>
             Return to Fleet
           </v-btn>
@@ -122,8 +122,8 @@ onMounted(async () => {
             <div>
               <h1 class="text-h3 font-weight-light">{{ currentShip.name }}</h1>
               <div class="d-flex align-center gap-2 mt-1">
-                <ATag :text="currentShip.registry" icon="mdi-identifier" color="primary" variant="outlined" />
-                <ATag :text="(currentShip as any).type" icon="mdi-rocket" color="info" variant="outlined" />
+                <ATag :text="currentShip.registry" icon="mdi-identifier" color="primary"  />
+                <ATag :text="(currentShip as any).type" icon="mdi-rocket" color="info"  />
               </div>
             </div>
           </div>
@@ -133,28 +133,28 @@ onMounted(async () => {
       <!-- Ship Statistics -->
       <v-row class="mb-6">
         <v-col cols="6" sm="3">
-          <v-card variant="outlined" class="text-center pa-4">
+          <v-card  class="text-center pa-4">
             <v-icon size="28" color="primary" class="mb-2">mdi-account-group</v-icon>
             <div class="text-h4">{{ shipStats?.crewCount || 0 }}</div>
             <div class="text-caption text-medium-emphasis">Crew Members</div>
           </v-card>
         </v-col>
         <v-col cols="6" sm="3">
-          <v-card variant="outlined" class="text-center pa-4">
+          <v-card  class="text-center pa-4">
             <v-icon size="28" color="success" class="mb-2">mdi-office-building</v-icon>
             <div class="text-h4">{{ shipStats?.departments || 0 }}</div>
             <div class="text-caption text-medium-emphasis">Departments</div>
           </v-card>
         </v-col>
         <v-col cols="6" sm="3">
-          <v-card variant="outlined" class="text-center pa-4">
+          <v-card  class="text-center pa-4">
             <v-icon size="28" color="info" class="mb-2">mdi-earth</v-icon>
             <div class="text-h4">{{ shipStats?.species || 0 }}</div>
             <div class="text-caption text-medium-emphasis">Species</div>
           </v-card>
         </v-col>
         <v-col cols="6" sm="3">
-          <v-card variant="outlined" class="text-center pa-4">
+          <v-card  class="text-center pa-4">
             <v-icon size="28" color="warning" class="mb-2">mdi-star-four-points</v-icon>
             <div class="text-h4">{{ shipStats?.hasCommand ? '✓' : '✗' }}</div>
             <div class="text-caption text-medium-emphasis">Command Staff</div>
@@ -165,7 +165,7 @@ onMounted(async () => {
       <v-row>
         <!-- Ship Information -->
         <v-col cols="12" lg="4">
-          <v-card variant="outlined" class="mb-4">
+          <v-card  class="mb-4">
             <v-card-title>
               <v-icon class="me-2">mdi-information</v-icon>
               Ship Information
@@ -177,7 +177,7 @@ onMounted(async () => {
           </v-card>
 
           <!-- Command Structure -->
-          <v-card variant="outlined" v-if="(currentShip as any).roles">
+          <v-card  v-if="(currentShip as any).roles">
             <v-card-title>
               <v-icon class="me-2">mdi-star-four-points</v-icon>
               Command Structure
@@ -213,7 +213,7 @@ onMounted(async () => {
 
         <!-- Crew by Department -->
         <v-col cols="12" lg="8">
-          <v-card variant="outlined">
+          <v-card >
             <v-card-title>
               <v-icon class="me-2">mdi-account-group</v-icon>
               Crew Roster
@@ -233,7 +233,7 @@ onMounted(async () => {
                       <v-icon :color="department.color" class="me-2">{{ department.icon }}</v-icon>
                       <span class="font-weight-medium">{{ department.name }}</span>
                       <v-spacer></v-spacer>
-                      <ATag :text="`${department.personnel.length} personnel`" size="small" variant="outlined" />
+                      <ATag :text="`${department.personnel.length} personnel`" size="small"  />
                     </div>
                   </v-expansion-panel-title>
                   <v-expansion-panel-text>
@@ -272,3 +272,4 @@ onMounted(async () => {
   background-color: rgba(var(--v-theme-on-surface), 0.04);
 }
 </style>
+

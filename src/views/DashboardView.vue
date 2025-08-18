@@ -18,7 +18,7 @@
         <v-alert type="error" prominent>
           {{ gameStore.error }}
           <template #append>
-            <v-btn variant="outlined" @click="loadData">Retry</v-btn>
+            <v-btn  @click="loadData">Retry</v-btn>
           </template>
         </v-alert>
       </v-col>
@@ -150,7 +150,7 @@
                 Ship Status
               </v-btn>
               <v-spacer />
-              <v-btn variant="outlined" prepend-icon="mdi-refresh" @click="loadData">
+              <v-btn  prepend-icon="mdi-refresh" @click="loadData">
                 Refresh Data
               </v-btn>
             </v-card-actions>
@@ -253,3 +253,4 @@ onMounted(async () => {
   opacity: 0.9;
 }
 </style>
+

@@ -106,12 +106,12 @@ onMounted(async () => {
     <!-- Mission Not Found -->
     <v-row v-else-if="!currentMission">
       <v-col cols="12" class="text-center">
-        <v-card variant="outlined" class="pa-8">
+        <v-card  class="pa-8">
           <v-icon size="64" color="error" class="mb-4">mdi-target-variant</v-icon>
           <h3 class="text-h5 mb-2">Mission Not Found</h3>
           <p class="text-medium-emphasis mb-4">The requested mission could not be located in the operations database.
           </p>
-          <v-btn variant="outlined" @click="goToMissions">
+          <v-btn  @click="goToMissions">
             <v-icon start>mdi-arrow-left</v-icon>
             Return to Missions
           </v-btn>
@@ -145,7 +145,7 @@ onMounted(async () => {
       <!-- Mission Overview -->
       <v-row class="mb-6">
         <v-col cols="12" md="6" lg="3">
-          <v-card variant="outlined" class="text-center pa-4">
+          <v-card  class="text-center pa-4">
             <v-icon size="28" :color="getStatusColor(missionStats?.status || 'unknown')" class="mb-2">
               mdi-information
             </v-icon>
@@ -154,7 +154,7 @@ onMounted(async () => {
           </v-card>
         </v-col>
         <v-col cols="12" md="6" lg="3">
-          <v-card variant="outlined" class="text-center pa-4">
+          <v-card  class="text-center pa-4">
             <v-icon size="28" :color="getPriorityColor(missionStats?.priority || 'unknown')" class="mb-2">
               mdi-flag
             </v-icon>
@@ -163,14 +163,14 @@ onMounted(async () => {
           </v-card>
         </v-col>
         <v-col cols="12" md="6" lg="3">
-          <v-card variant="outlined" class="text-center pa-4">
+          <v-card  class="text-center pa-4">
             <v-icon size="28" color="info" class="mb-2">mdi-map-marker</v-icon>
             <div class="text-h6">{{ missionStats?.location || 'Unknown' }}</div>
             <div class="text-caption text-medium-emphasis">Location</div>
           </v-card>
         </v-col>
         <v-col cols="12" md="6" lg="3">
-          <v-card variant="outlined" class="text-center pa-4">
+          <v-card  class="text-center pa-4">
             <v-icon size="28" color="warning" class="mb-2">mdi-calendar</v-icon>
             <div class="text-h6">{{ formatDate(currentMission.date) }}</div>
             <div class="text-caption text-medium-emphasis">Mission Date</div>
@@ -181,7 +181,7 @@ onMounted(async () => {
       <v-row>
         <!-- Mission Information -->
         <v-col cols="12" lg="8">
-          <v-card variant="outlined" class="mb-4">
+          <v-card  class="mb-4">
             <v-card-title>
               <v-icon class="me-2">mdi-target</v-icon>
               Mission Brief
@@ -193,7 +193,7 @@ onMounted(async () => {
           </v-card>
 
           <!-- Mission Details -->
-          <v-card variant="outlined">
+          <v-card >
             <v-card-title>
               <v-icon class="me-2">mdi-information-outline</v-icon>
               Mission Details
@@ -268,7 +268,7 @@ onMounted(async () => {
 
         <!-- Mission Resources -->
         <v-col cols="12" lg="4">
-          <v-card variant="outlined" class="mb-4">
+          <v-card  class="mb-4">
             <v-card-title>
               <v-icon class="me-2">mdi-rocket</v-icon>
               Assigned Vessels
@@ -293,7 +293,7 @@ onMounted(async () => {
             </v-card-text>
           </v-card>
 
-          <v-card variant="outlined">
+          <v-card >
             <v-card-title>
               <v-icon class="me-2">mdi-clock-outline</v-icon>
               Mission Timeline
@@ -353,3 +353,4 @@ onMounted(async () => {
   background-color: rgba(var(--v-theme-on-surface), 0.04);
 }
 </style>
+

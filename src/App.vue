@@ -10,10 +10,11 @@ import AppHeader from '@/components/AppHeader.vue'
       <AppHeader />
       <NavigationDrawer />
       <v-main class="d-flex ">
-        <v-container class="border rounded">
+        <v-container class=" rounded">
           <RouterView />
         </v-container>
       </v-main>
     </v-app>
   </v-responsive>
 </template>
+

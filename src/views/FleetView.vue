@@ -84,28 +84,28 @@ onMounted(async () => {
     <!-- Fleet Statistics -->
     <v-row class="mb-6">
       <v-col cols="6" sm="3">
-        <v-card variant="outlined" class="text-center pa-4">
+        <v-card  class="text-center pa-4">
           <v-icon size="28" color="primary" class="mb-2">mdi-rocket</v-icon>
           <div class="text-h4">{{ fleetStats.totalShips }}</div>
           <div class="text-caption text-medium-emphasis">Total Ships</div>
         </v-card>
       </v-col>
       <v-col cols="6" sm="3">
-        <v-card variant="outlined" class="text-center pa-4">
+        <v-card  class="text-center pa-4">
           <v-icon size="28" color="success" class="mb-2">mdi-rocket-launch</v-icon>
           <div class="text-h4">{{ fleetStats.activeShips }}</div>
           <div class="text-caption text-medium-emphasis">Active Ships</div>
         </v-card>
       </v-col>
       <v-col cols="6" sm="3">
-        <v-card variant="outlined" class="text-center pa-4">
+        <v-card  class="text-center pa-4">
           <v-icon size="28" color="info" class="mb-2">mdi-shape</v-icon>
           <div class="text-h4">{{ fleetStats.shipClasses }}</div>
           <div class="text-caption text-medium-emphasis">Ship Classes</div>
         </v-card>
       </v-col>
       <v-col cols="6" sm="3">
-        <v-card variant="outlined" class="text-center pa-4">
+        <v-card  class="text-center pa-4">
           <v-icon size="28" color="warning" class="mb-2">mdi-account-group</v-icon>
           <div class="text-h4">{{ fleetStats.totalCrew }}</div>
           <div class="text-caption text-medium-emphasis">Total Crew</div>
@@ -116,16 +116,16 @@ onMounted(async () => {
     <!-- Filters and Search -->
     <v-row class="mb-4">
       <v-col cols="12" md="6">
-        <v-text-field v-model="search" label="Search ships..." prepend-inner-icon="mdi-magnify" variant="outlined"
+        <v-text-field v-model="search" label="Search ships..." prepend-inner-icon="mdi-magnify" 
           hide-details clearable />
       </v-col>
       <v-col cols="12" md="4">
         <v-select v-model="selectedClass"
           :items="[{ title: 'All Classes', value: 'all' }, ...shipClasses.map(c => ({ title: c, value: c }))]"
-          label="Filter by Class" variant="outlined" hide-details />
+          label="Filter by Class"  hide-details />
       </v-col>
       <v-col cols="12" md="2" class="d-flex align-center">
-        <v-btn variant="outlined" @click="clearFilters" block>
+        <v-btn  @click="clearFilters" block>
           Clear Filters
         </v-btn>
       </v-col>
@@ -164,13 +164,13 @@ onMounted(async () => {
     <!-- Empty State -->
     <v-row v-else>
       <v-col cols="12" class="text-center">
-        <v-card variant="outlined" class="pa-8">
+        <v-card  class="pa-8">
           <v-icon size="64" color="medium-emphasis" class="mb-4">mdi-rocket-outline</v-icon>
           <h3 class="text-h5 mb-2">No Ships Found</h3>
           <p class="text-medium-emphasis mb-4">
             {{ search || selectedClass !== 'all' ? 'Try adjusting your filters' : 'No ships in the fleet database' }}
           </p>
-          <v-btn v-if="search || selectedClass !== 'all'" variant="outlined" @click="clearFilters">
+          <v-btn v-if="search || selectedClass !== 'all'"  @click="clearFilters">
             Clear Filters
           </v-btn>
         </v-card>
@@ -188,3 +188,4 @@ onMounted(async () => {
   transform: translateY(-2px);
 }
 </style>
+

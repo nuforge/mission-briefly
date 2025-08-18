@@ -96,3 +96,4 @@ const characters = computed(() => gameStore.characters.slice(0, 10)) // Limit to
     <v-list-item prepend-icon="mdi-information" title="About" to="/about" color="primary" />
   </v-navigation-drawer>
 </template>
+

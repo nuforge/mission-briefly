@@ -107,12 +107,12 @@ onMounted(async () => {
     <!-- Character Not Found -->
     <v-row v-else-if="!currentCharacter">
       <v-col cols="12" class="text-center">
-        <v-card variant="outlined" class="pa-8">
+        <v-card  class="pa-8">
           <v-icon size="64" color="error" class="mb-4">mdi-account-outline</v-icon>
           <h3 class="text-h5 mb-2">Personnel Not Found</h3>
           <p class="text-medium-emphasis mb-4">The requested crew member could not be located in the personnel database.
           </p>
-          <v-btn variant="outlined" @click="goToPersonnel">
+          <v-btn  @click="goToPersonnel">
             <v-icon start>mdi-arrow-left</v-icon>
             Return to Personnel
           </v-btn>
@@ -136,12 +136,12 @@ onMounted(async () => {
                 <div class="d-flex align-center" v-if="(currentCharacter as any).rank">
                   <RankPips :rank="(currentCharacter as any).rank" class="me-2" />
                   <ATag :text="(currentCharacter as any).rank.name" icon="mdi-star" color="primary"
-                    variant="outlined" />
+                     />
                 </div>
                 <div class="d-flex align-center" v-if="(currentCharacter as any).department">
                   <DepartmentIcon :department="(currentCharacter as any).department" class="me-2" />
                   <ATag :text="(currentCharacter as any).department.name" icon="mdi-office-building" color="info"
-                    variant="outlined" />
+                     />
                 </div>
               </div>
             </div>
@@ -152,28 +152,28 @@ onMounted(async () => {
       <!-- Character Statistics -->
       <v-row class="mb-6">
         <v-col cols="6" sm="3">
-          <v-card variant="outlined" class="text-center pa-4">
+          <v-card  class="text-center pa-4">
             <v-icon size="28" color="primary" class="mb-2">mdi-star</v-icon>
             <div class="text-h6">{{ characterStats?.rank || 'N/A' }}</div>
             <div class="text-caption text-medium-emphasis">Rank</div>
           </v-card>
         </v-col>
         <v-col cols="6" sm="3">
-          <v-card variant="outlined" class="text-center pa-4">
+          <v-card  class="text-center pa-4">
             <v-icon size="28" color="success" class="mb-2">mdi-office-building</v-icon>
             <div class="text-h6">{{ characterStats?.department || 'N/A' }}</div>
             <div class="text-caption text-medium-emphasis">Department</div>
           </v-card>
         </v-col>
         <v-col cols="6" sm="3">
-          <v-card variant="outlined" class="text-center pa-4">
+          <v-card  class="text-center pa-4">
             <v-icon size="28" color="info" class="mb-2">mdi-earth</v-icon>
             <div class="text-h6">{{ characterStats?.species || 'N/A' }}</div>
             <div class="text-caption text-medium-emphasis">Species</div>
           </v-card>
         </v-col>
         <v-col cols="6" sm="3">
-          <v-card variant="outlined" class="text-center pa-4">
+          <v-card  class="text-center pa-4">
             <v-icon size="28" color="warning" class="mb-2">mdi-rocket</v-icon>
             <div class="text-h4">{{ characterStats?.assignments || 0 }}</div>
             <div class="text-caption text-medium-emphasis">Ship Assignments</div>
@@ -184,7 +184,7 @@ onMounted(async () => {
       <v-row>
         <!-- Character Information -->
         <v-col cols="12" lg="4">
-          <v-card variant="outlined" class="mb-4">
+          <v-card  class="mb-4">
             <v-card-title>
               <v-icon class="me-2">mdi-account</v-icon>
               Personnel File
@@ -196,7 +196,7 @@ onMounted(async () => {
           </v-card>
 
           <!-- Command Roles -->
-          <v-card variant="outlined" v-if="commandRoles.length > 0" class="mb-4">
+          <v-card  v-if="commandRoles.length > 0" class="mb-4">
             <v-card-title>
               <v-icon class="me-2">mdi-star-four-points</v-icon>
               Command Positions
@@ -217,7 +217,7 @@ onMounted(async () => {
           </v-card>
 
           <!-- Character Details -->
-          <v-card variant="outlined">
+          <v-card >
             <v-card-title>
               <v-icon class="me-2">mdi-information</v-icon>
               Details
@@ -265,7 +265,7 @@ onMounted(async () => {
 
         <!-- Ship Assignments -->
         <v-col cols="12" lg="8">
-          <v-card variant="outlined">
+          <v-card >
             <v-card-title>
               <v-icon class="me-2">mdi-rocket</v-icon>
               Ship Assignments
@@ -310,3 +310,4 @@ onMounted(async () => {
   background-color: rgba(var(--v-theme-on-surface), 0.04);
 }
 </style>
+

@@ -39,28 +39,28 @@ const navigateTo = (path: string) => {
     <!-- Quick Stats -->
     <v-row class="mb-6">
       <v-col cols="6" md="3">
-        <v-card class="text-center pa-4" variant="outlined" @click="navigateTo('/dashboard')" style="cursor: pointer">
+        <v-card class="text-center pa-4" @click="navigateTo('/dashboard')" style="cursor: pointer">
           <v-icon size="32" color="primary" class="mb-2">mdi-view-dashboard</v-icon>
           <div class="text-h4">{{ gameDataStore.totalShips }}</div>
           <div class="text-caption text-medium-emphasis">Fleet Ships</div>
         </v-card>
       </v-col>
       <v-col cols="6" md="3">
-        <v-card class="text-center pa-4" variant="outlined" @click="navigateTo('/crew')" style="cursor: pointer">
+        <v-card class="text-center pa-4" @click="navigateTo('/crew')" style="cursor: pointer">
           <v-icon size="32" color="secondary" class="mb-2">mdi-account-group</v-icon>
           <div class="text-h4">{{ gameDataStore.totalCharacters }}</div>
           <div class="text-caption text-medium-emphasis">Personnel</div>
         </v-card>
       </v-col>
       <v-col cols="6" md="3">
-        <v-card class="text-center pa-4" variant="outlined" @click="navigateTo('/missions')" style="cursor: pointer">
+        <v-card class="text-center pa-4" @click="navigateTo('/missions')" style="cursor: pointer">
           <v-icon size="32" color="success" class="mb-2">mdi-target</v-icon>
           <div class="text-h4">{{ gameDataStore.totalMissions }}</div>
           <div class="text-caption text-medium-emphasis">Active Missions</div>
         </v-card>
       </v-col>
       <v-col cols="6" md="3">
-        <v-card class="text-center pa-4" variant="outlined">
+        <v-card class="text-center pa-4">
           <v-icon size="32" color="warning" class="mb-2">mdi-star-four-points</v-icon>
           <div class="text-h4">2378</div>
           <div class="text-caption text-medium-emphasis">Stardate</div>
@@ -71,7 +71,7 @@ const navigateTo = (path: string) => {
     <!-- Recent Activity -->
     <v-row>
       <v-col cols="12" lg="8">
-        <v-card variant="outlined">
+        <v-card>
           <v-card-title>
             <v-icon class="me-2">mdi-clock-outline</v-icon>
             Recent Missions
@@ -94,7 +94,7 @@ const navigateTo = (path: string) => {
       </v-col>
 
       <v-col cols="12" lg="4">
-        <v-card variant="outlined" class="mb-4">
+        <v-card class="mb-4">
           <v-card-title>
             <v-icon class="me-2">mdi-rocket</v-icon>
             Featured Ship
@@ -105,7 +105,7 @@ const navigateTo = (path: string) => {
           </v-card-text>
         </v-card>
 
-        <v-card variant="outlined">
+        <v-card>
           <v-card-title>
             <v-icon class="me-2">mdi-account-star</v-icon>
             Officer of the Day
@@ -119,3 +119,4 @@ const navigateTo = (path: string) => {
     </v-row>
   </v-container>
 </template>
+

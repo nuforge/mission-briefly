@@ -27,3 +27,4 @@ setInterval(() => {
       %</v-progress-linear>
   </v-card-actions>
 </template>
+

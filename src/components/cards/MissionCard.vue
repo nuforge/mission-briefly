@@ -79,7 +79,7 @@ function getPriorityColor(priority: string): string {
           :icon="getPriorityIcon((mission as any).priority)" :color="getPriorityColor((mission as any).priority)"
           variant="tonal" />
         <ATag v-if="mission.date" :text="mission.date.getFullYear().toString()" icon="mdi-calendar" color="blue"
-          variant="outlined" />
+           />
       </div>
     </v-card-text>
 
@@ -87,7 +87,7 @@ function getPriorityColor(priority: string): string {
       <v-btn variant="tonal" color="primary" prepend-icon="mdi-eye" size="small">
         View Details
       </v-btn>
-      <v-btn variant="outlined" color="secondary" prepend-icon="mdi-account-group" size="small">
+      <v-btn  color="secondary" prepend-icon="mdi-account-group" size="small">
         Crew
       </v-btn>
       <v-spacer></v-spacer>
@@ -98,3 +98,4 @@ function getPriorityColor(priority: string): string {
     </v-card-actions>
   </v-card>
 </template>
+

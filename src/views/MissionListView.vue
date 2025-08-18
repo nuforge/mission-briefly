@@ -126,7 +126,7 @@ onMounted(async () => {
                                 coordination</p>
                         </div>
                     </div>
-                    <v-btn-toggle v-model="viewMode" mandatory variant="outlined">
+                    <v-btn-toggle v-model="viewMode" mandatory>
                         <v-btn value="cards" icon="mdi-view-grid"></v-btn>
                         <v-btn value="table" icon="mdi-table"></v-btn>
                     </v-btn-toggle>
@@ -137,28 +137,28 @@ onMounted(async () => {
         <!-- Mission Statistics -->
         <v-row class="mb-6">
             <v-col cols="6" sm="3">
-                <v-card variant="outlined" class="text-center pa-4">
+                <v-card class="text-center pa-4">
                     <v-icon size="28" color="primary" class="mb-2">mdi-target</v-icon>
                     <div class="text-h4">{{ missionStats.totalMissions }}</div>
                     <div class="text-caption text-medium-emphasis">Total Missions</div>
                 </v-card>
             </v-col>
             <v-col cols="6" sm="3">
-                <v-card variant="outlined" class="text-center pa-4">
+                <v-card class="text-center pa-4">
                     <v-icon size="28" color="success" class="mb-2">mdi-rocket-launch</v-icon>
                     <div class="text-h4">{{ missionStats.activeMissions }}</div>
                     <div class="text-caption text-medium-emphasis">Active Missions</div>
                 </v-card>
             </v-col>
             <v-col cols="6" sm="3">
-                <v-card variant="outlined" class="text-center pa-4">
+                <v-card class="text-center pa-4">
                     <v-icon size="28" color="error" class="mb-2">mdi-alert</v-icon>
                     <div class="text-h4">{{ missionStats.highPriority }}</div>
                     <div class="text-caption text-medium-emphasis">High Priority</div>
                 </v-card>
             </v-col>
             <v-col cols="6" sm="3">
-                <v-card variant="outlined" class="text-center pa-4">
+                <v-card class="text-center pa-4">
                     <v-icon size="28" color="info" class="mb-2">mdi-check-circle</v-icon>
                     <div class="text-h4">{{ missionStats.completedMissions }}</div>
                     <div class="text-caption text-medium-emphasis">Completed</div>
@@ -169,21 +169,21 @@ onMounted(async () => {
         <!-- Filters and Search -->
         <v-row class="mb-4">
             <v-col cols="12" md="4">
-                <v-text-field v-model="search" label="Search missions..." prepend-inner-icon="mdi-magnify"
-                    variant="outlined" hide-details clearable />
+                <v-text-field v-model="search" label="Search missions..." prepend-inner-icon="mdi-magnify" hide-details
+                    clearable />
             </v-col>
             <v-col cols="12" md="3">
                 <v-select v-model="selectedStatus"
                     :items="[{ title: 'All Statuses', value: 'all' }, ...missionStatuses.map(s => ({ title: s.charAt(0).toUpperCase() + s.slice(1), value: s }))]"
-                    label="Status" variant="outlined" hide-details />
+                    label="Status" hide-details />
             </v-col>
             <v-col cols="12" md="3">
                 <v-select v-model="selectedPriority"
                     :items="[{ title: 'All Priorities', value: 'all' }, ...missionPriorities.map(p => ({ title: p.charAt(0).toUpperCase() + p.slice(1), value: p }))]"
-                    label="Priority" variant="outlined" hide-details />
+                    label="Priority" hide-details />
             </v-col>
             <v-col cols="12" md="2" class="d-flex align-center">
-                <v-btn variant="outlined" @click="clearFilters" block>
+                <v-btn @click="clearFilters" block>
                     Clear Filters
                 </v-btn>
             </v-col>
@@ -224,7 +224,7 @@ onMounted(async () => {
         <!-- Table View -->
         <v-row v-else-if="filteredMissions.length > 0 && viewMode === 'table'">
             <v-col cols="12">
-                <v-card variant="outlined">
+                <v-card>
                     <v-data-table :headers="[
                         { title: 'Mission', key: 'title' },
                         { title: 'Status', key: 'status' },
@@ -239,7 +239,7 @@ onMounted(async () => {
                                 <div>
                                     <div class="font-weight-medium">{{ item.title }}</div>
                                     <div class="text-caption text-medium-emphasis">{{ item.objective.substring(0, 60)
-                                    }}...</div>
+                                        }}...</div>
                                 </div>
                             </div>
                         </template>
@@ -271,7 +271,7 @@ onMounted(async () => {
         <!-- Empty State -->
         <v-row v-else>
             <v-col cols="12" class="text-center">
-                <v-card variant="outlined" class="pa-8">
+                <v-card class="pa-8">
                     <v-icon size="64" color="medium-emphasis" class="mb-4">mdi-target-variant</v-icon>
                     <h3 class="text-h5 mb-2">No Missions Found</h3>
                     <p class="text-medium-emphasis mb-4">
@@ -279,7 +279,7 @@ onMounted(async () => {
                             ? 'Try adjusting your filters'
                             : 'No missions in the operations database' }}
                     </p>
-                    <v-btn v-if="search || selectedStatus !== 'all' || selectedPriority !== 'all'" variant="outlined"
+                    <v-btn v-if="search || selectedStatus !== 'all' || selectedPriority !== 'all'"
                         @click="clearFilters">
                         Clear Filters
                     </v-btn>
@@ -298,7 +298,7 @@ onMounted(async () => {
     transform: translateY(-2px);
 }
 
-.v-data-table>>>tbody tr {
+.v-data-table :deep(tbody tr) {
     cursor: pointer;
 }
 </style>
