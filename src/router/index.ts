@@ -12,9 +12,6 @@ const router = createRouter({
     {
       path: '/about',
       name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
       component: () => import('../views/AboutView.vue'),
       meta: { title: 'About' },
     },
@@ -24,34 +21,46 @@ const router = createRouter({
       component: () => import('../views/DashboardView.vue'),
       meta: { title: 'Fleet Command Dashboard' },
     },
+    // Fleet routes
+    {
+      path: '/fleet',
+      name: 'fleet',
+      component: () => import('../views/FleetView.vue'),
+      meta: { title: 'Fleet Overview' },
+    },
     {
       path: '/ship/:shipName',
       name: 'ship',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import('../views/ShipView.vue'), // Ensure this file exists
-      props: true, // Pass the route parameter as a prop
+      component: () => import('../views/ShipView.vue'),
+      props: true,
       meta: { title: 'Ship Details' },
+    },
+    // Personnel routes
+    {
+      path: '/crew',
+      name: 'crew-list',
+      component: () => import('../views/CrewListView.vue'),
+      meta: { title: 'Fleet Personnel' },
     },
     {
       path: '/crew/:crewName',
-      name: 'crew',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import('../views/CrewView.vue'), // Ensure this file exists
-      props: true, // Pass the route parameter as a prop
+      name: 'crew-detail',
+      component: () => import('../views/CrewView.vue'),
+      props: true,
       meta: { title: 'Crew Member' },
+    },
+    // Mission routes
+    {
+      path: '/missions',
+      name: 'missions',
+      component: () => import('../views/MissionListView.vue'),
+      meta: { title: 'Mission Operations' },
     },
     {
       path: '/mission/:missionId',
       name: 'mission',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import('../views/MissionView.vue'), // Ensure this file exists
-      props: true, // Pass the route parameter as a prop
+      component: () => import('../views/MissionView.vue'),
+      props: true,
       meta: { title: 'Mission Details' },
     },
   ],

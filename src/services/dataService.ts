@@ -353,6 +353,8 @@ class DataService {
         missionData.objective,
         missionData.location,
         new Date(missionData.date),
+        missionData.status,
+        missionData.priority,
       )
 
       // Override the auto-generated ID with the JSON ID

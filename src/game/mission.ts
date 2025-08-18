@@ -7,6 +7,8 @@ export default class Mission {
   protected _objective: string
   protected _location?: string
   protected _date?: Date
+  protected _status?: string
+  protected _priority?: string
 
   private generateId(name: string): string {
     try {
@@ -16,7 +18,14 @@ export default class Mission {
     }
   }
 
-  constructor(title: string, objective: string, location?: string, date?: Date) {
+  constructor(
+    title: string,
+    objective: string,
+    location?: string,
+    date?: Date,
+    status?: string,
+    priority?: string,
+  ) {
     try {
       // Validate required fields
       validateNonEmptyString(title, 'Mission title')
@@ -34,11 +43,23 @@ export default class Mission {
         validateDate(date, 'Mission date')
       }
 
+      if (status !== undefined) {
+        validateNonEmptyString(status, 'Mission status')
+        validateMaxLength(status, 50, 'Mission status')
+      }
+
+      if (priority !== undefined) {
+        validateNonEmptyString(priority, 'Mission priority')
+        validateMaxLength(priority, 50, 'Mission priority')
+      }
+
       this._title = title.trim()
       this._id = this.generateId(this._title)
       this._objective = objective.trim()
       this._location = location?.trim()
       this._date = date || new Date()
+      this._status = status?.trim()
+      this._priority = priority?.trim()
     } catch (error) {
       if (error instanceof MissionError) {
         throw error
@@ -93,6 +114,14 @@ export default class Mission {
 
   get date(): Date | undefined {
     return this._date
+  }
+
+  get status(): string | undefined {
+    return this._status
+  }
+
+  get priority(): string | undefined {
+    return this._priority
   }
 
   set title(title: string) {
@@ -157,6 +186,42 @@ export default class Mission {
     }
   }
 
+  set status(status: string | undefined) {
+    try {
+      if (status !== undefined) {
+        validateNonEmptyString(status, 'Mission status')
+        validateMaxLength(status, 50, 'Mission status')
+        this._status = status.trim()
+      } else {
+        this._status = undefined
+      }
+    } catch (error) {
+      if (error instanceof MissionError) {
+        throw error
+      }
+      const errorMessage = error instanceof Error ? error.message : String(error)
+      throw new MissionError(`Failed to set status: ${errorMessage}`, { status })
+    }
+  }
+
+  set priority(priority: string | undefined) {
+    try {
+      if (priority !== undefined) {
+        validateNonEmptyString(priority, 'Mission priority')
+        validateMaxLength(priority, 50, 'Mission priority')
+        this._priority = priority.trim()
+      } else {
+        this._priority = undefined
+      }
+    } catch (error) {
+      if (error instanceof MissionError) {
+        throw error
+      }
+      const errorMessage = error instanceof Error ? error.message : String(error)
+      throw new MissionError(`Failed to set priority: ${errorMessage}`, { priority })
+    }
+  }
+
   setTitle(title: string): Mission {
     this.title = title // Use setter for validation
     return this
@@ -177,6 +242,16 @@ export default class Mission {
     return this
   }
 
+  setStatus(status: string | undefined): Mission {
+    this.status = status // Use setter for validation
+    return this
+  }
+
+  setPriority(priority: string | undefined): Mission {
+    this.priority = priority // Use setter for validation
+    return this
+  }
+
   toJSON(): object {
     return {
       id: this._id,
@@ -185,6 +260,8 @@ export default class Mission {
       objective: this._objective,
       location: this._location,
       date: this._date,
+      status: this._status,
+      priority: this._priority,
     }
   }
 

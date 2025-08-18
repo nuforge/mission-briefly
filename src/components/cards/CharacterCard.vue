@@ -13,18 +13,26 @@ defineProps({
 </script>
 
 <template>
-  <v-card :title="character.name" :subtitle="character.rank?.name" density="compact" class="border-t-md bg-background">
-    <template #title>
-      <ATag :text="character.name" icon="mdi-account-circle-outline" size="medium" />
-    </template>
-    <template #subtitle>
-      <RankPips v-if="character.rank" :rank="character.rank" />{{ character.rank?.name }}
-    </template>
-    <v-chip-group class="bg-background elevation-1 " column>
-      <ATag :text="character?.species?.name" icon="mdi-account-box-outline" />
-      <ATag :text="character?.rank?.name" icon="mdi-account-circle-outline" />
-      <ATag :text="character?.department?.name" :icon="character?.department?.icon"
-        :color="character?.department?.color" />
-    </v-chip-group>
+  <v-card elevation="2" rounded="lg">
+    <v-card-title class="d-flex align-center">
+      <v-avatar class="me-3" color="primary">
+        <v-icon>mdi-account</v-icon>
+      </v-avatar>
+      <div>
+        <div class="text-h6">{{ character.name }}</div>
+        <div v-if="character.rank" class="text-caption d-flex align-center">
+          <RankPips :rank="character.rank" class="me-2" />
+          {{ character.rank.name }}
+        </div>
+      </div>
+    </v-card-title>
+
+    <v-card-text>
+      <div class="d-flex flex-wrap ga-2">
+        <ATag v-if="character?.species?.name" :text="character.species.name" icon="mdi-dna" variant="tonal" />
+        <ATag v-if="character?.department?.name" :text="character.department.name" :icon="character.department.icon"
+          :color="character.department.color" variant="tonal" />
+      </div>
+    </v-card-text>
   </v-card>
 </template>
