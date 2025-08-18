@@ -84,7 +84,7 @@
                 <p class="text-subtitle1 mt-2">No ships in fleet</p>
               </div>
               <div v-else>
-                <StarshipCard v-for="ship in gameStore.ships" :key="ship.id" :ship="ship" class="mb-3" />
+                <StarshipCard v-for="ship in gameStore.ships" :key="ship.id" :ship="ship as Ship" class="mb-3" />
               </div>
             </v-card-text>
           </v-card>
@@ -103,7 +103,8 @@
                 <p class="text-subtitle1 mt-2">No active missions</p>
               </div>
               <div v-else>
-                <MissionCard v-for="mission in gameStore.missions" :key="mission.id" :mission="mission" class="mb-3" />
+                <MissionCard v-for="mission in gameStore.missions" :key="mission.id" :mission="mission as Mission"
+                  class="mb-3" />
               </div>
             </v-card-text>
           </v-card>
@@ -167,6 +168,8 @@ import { useGameDataStore } from '@/stores/gameData'
 import StarshipCard from '@/components/cards/StarshipCard.vue'
 import MissionCard from '@/components/cards/MissionCard.vue'
 import DepartmentIcon from '@/components/DepartmentIcon.vue'
+import type Ship from '@/game/ship'
+import type Mission from '@/game/mission'
 
 const router = useRouter()
 const gameStore = useGameDataStore()

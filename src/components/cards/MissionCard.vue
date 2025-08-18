@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import ATag from '@/components/tags/ATag.vue'
-import Mission from '@/game/mission'
+import type Mission from '@/game/mission'
 
-defineProps<{
+interface Props {
   mission: Mission
-}>()
+}
+
+defineProps<Props>()
 
 </script>
 
@@ -12,10 +14,11 @@ defineProps<{
   <v-card>
     <v-card-title><v-icon icon="mdi-map-marker-radius" color="info" /> {{ mission.title }}</v-card-title>
     <v-card-text>
-    <v-chip-group class="bg-background elevation-1 my-2 px-2 rounded" column v-if="mission.date || mission.location" variant="text">
-      <ATag :text="mission.date?.getFullYear()?.toString()" icon="mdi-web-clock" color="info" />
-      <ATag :text="mission.location" icon="mdi-web" color="info" />
-    </v-chip-group>
+      <v-chip-group class="bg-background elevation-1 my-2 px-2 rounded" column v-if="mission.date || mission.location"
+        variant="text">
+        <ATag :text="mission.date?.getFullYear()?.toString()" icon="mdi-web-clock" color="info" />
+        <ATag :text="mission.location" icon="mdi-web" color="info" />
+      </v-chip-group>
       <p>{{ mission.objective }}</p>
     </v-card-text>
     <v-card-actions>

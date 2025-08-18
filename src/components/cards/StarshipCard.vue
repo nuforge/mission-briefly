@@ -1,14 +1,13 @@
 <script setup lang="ts">
-import Ship from '@/game/ship'
+import type Ship from '@/game/ship'
 import ATag from '@/components/tags/ATag.vue'
 import CharacterTag from '@/components/tags/CharacterTag.vue';
 
-defineProps({
-  ship: {
-    type: Ship,
-    required: true
-  }
-})
+interface Props {
+  ship: Ship
+}
+
+defineProps<Props>()
 
 </script>
 
