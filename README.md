@@ -18,6 +18,18 @@ Mission Briefly simulates Starfleet operations, allowing users to manage charact
 
 This project is in active development. See [PROJECT_STATUS.md](./PROJECT_STATUS.md) for detailed project analysis and roadmap.
 
+## 📋 Development Guidelines
+
+### Vuetify Component Changes
+
+Before modifying Vuetify tree-shaking configuration, review [VUETIFY_CHECKLIST.md](./VUETIFY_CHECKLIST.md) to prevent component display issues.
+
+### Documentation
+
+- [PROJECT_STATUS.md](./PROJECT_STATUS.md) - Comprehensive project analysis and roadmap
+- [DEVELOPMENT_TRACKER.md](./DEVELOPMENT_TRACKER.md) - Sprint planning and progress tracking
+- [VUETIFY_CHECKLIST.md](./VUETIFY_CHECKLIST.md) - Component audit checklist for Vuetify changes
+
 ## Recommended IDE Setup
 
 [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).

@@ -189,15 +189,15 @@ export const measureAsyncOperation = async <T>(
 }
 
 export const logBundleReport = () => {
-  console.log(performanceMonitor.getBundleReport())
+  // console.log(performanceMonitor.getBundleReport())
 }
 
 // Auto-log performance metrics in development
 if (import.meta.env.DEV) {
   // Log initial metrics after page load
-  window.addEventListener('load', () => {
-    setTimeout(() => {
-      logBundleReport()
-    }, 1000)
-  })
+  // window.addEventListener('load', () => {
+  //   setTimeout(() => {
+  //     logBundleReport()
+  //   }, 1000)
+  // })
 }

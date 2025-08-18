@@ -29,7 +29,7 @@ defineProps({
 </script>
 
 <template>
-  <v-chip label :text="character.name" class="ga-1" variant="text" @click:append="toggleDepartment" :size="size">
+  <v-chip label class="ga-1" variant="text" @click:append="toggleDepartment" :size="size">
     <template #prepend>
       <DepartmentIcon v-if="showDepartment && character.department" :department="character.department" />
     </template>
@@ -38,8 +38,12 @@ defineProps({
         <template #activator="{ props }">
           <v-sheet class="bg-transparent" v-bind="props">{{ character.name }}</v-sheet>
         </template>
-        <v-label>{{ character.name }}</v-label><br />
-        <RankPips v-if="character.rank" :rank="character.rank" :size="`x-small`" />
+        <div>
+          <v-label>{{ character.name }}</v-label><br />
+          <small v-if="character.rank">{{ character.rank.name }}</small><br />
+          <small v-if="character.department">{{ character.department.name }}</small><br />
+          <RankPips v-if="character.rank" :rank="character.rank" :size="`x-small`" />
+        </div>
       </v-tooltip>
     </template>
   </v-chip>
