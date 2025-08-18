@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, onMounted } from 'vue'
 import { useGameDataStore } from '@/stores/gameData'
-import useStateStore from '@/stores/state'
+import { useStateStore } from '@/stores/state'
 
 const gameStore = useGameDataStore()
 const state = useStateStore()

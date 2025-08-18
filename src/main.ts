@@ -19,10 +19,10 @@ app.use(vuetify)
 app.use(router)
 
 // Connect router to state store for navigation tracking
-const stateStore = useStateStore()
-
-// Set up route change tracking
 router.beforeEach((to, from, next) => {
+  // Get the store instance after Pinia is initialized
+  const stateStore = useStateStore()
+
   // Update page state
   stateStore.setCurrentPage((to.name as string) || 'unknown')
 
