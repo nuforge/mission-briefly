@@ -17,6 +17,11 @@ const router = createRouter({
       component: () => import('../views/AboutView.vue'),
     },
     {
+      path: '/dashboard',
+      name: 'dashboard',
+      component: () => import('../views/DashboardView.vue'),
+    },
+    {
       path: '/ship/:shipName',
       name: 'ship',
       // route level code-splitting

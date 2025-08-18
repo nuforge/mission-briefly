@@ -1,0 +1,124 @@
+{
+  "tngCharacters": [
+    {
+      "id": "jean-luc-picard",
+      "name": "Jean-Luc Picard",
+      "species": {
+        "name": "Human",
+        "type": "Species",
+        "origin": "Earth"
+      },
+      "rank": {
+        "name": "Captain",
+        "title": "Captain",
+        "value": 6,
+        "class": "command"
+      },
+      "department": {
+        "name": "command",
+        "color": "red",
+        "icon": "mdi-star-four-points"
+      }
+    },
+    {
+      "id": "william-riker",
+      "name": "William Riker",
+      "species": {
+        "name": "Human",
+        "type": "Species",
+        "origin": "Earth"
+      },
+      "rank": {
+        "name": "Commander",
+        "title": "Commander",
+        "value": 5,
+        "class": "command"
+      },
+      "department": {
+        "name": "command",
+        "color": "red",
+        "icon": "mdi-star-four-points"
+      }
+    },
+    {
+      "id": "beverly-crusher",
+      "name": "Beverly Crusher",
+      "species": {
+        "name": "Human",
+        "type": "Species",
+        "origin": "Earth"
+      },
+      "rank": {
+        "name": "Commander",
+        "title": "Commander",
+        "value": 5,
+        "class": "sciences"
+      },
+      "department": {
+        "name": "medical",
+        "color": "blue",
+        "icon": "mdi-medical-bag"
+      }
+    },
+    {
+      "id": "data",
+      "name": "Data",
+      "species": {
+        "name": "Android",
+        "type": "Species",
+        "origin": "Omicron Theta"
+      },
+      "rank": {
+        "name": "LieutenantCommander",
+        "title": "Lieutenant Commander",
+        "value": 4,
+        "class": "sciences"
+      },
+      "department": {
+        "name": "operations",
+        "color": "yellow",
+        "icon": "mdi-cog"
+      }
+    },
+    {
+      "id": "geordi-la-forge",
+      "name": "Geordi La Forge",
+      "species": {
+        "name": "Human",
+        "type": "Species",
+        "origin": "Earth"
+      },
+      "rank": {
+        "name": "LieutenantCommander",
+        "title": "Lieutenant Commander",
+        "value": 4,
+        "class": "operations"
+      },
+      "department": {
+        "name": "engineering",
+        "color": "yellow",
+        "icon": "mdi-wrench"
+      }
+    },
+    {
+      "id": "deanna-troi",
+      "name": "Deanna Troi",
+      "species": {
+        "name": "Betazoid",
+        "type": "Species",
+        "origin": "Betazed"
+      },
+      "rank": {
+        "name": "LieutenantCommander",
+        "title": "Lieutenant Commander",
+        "value": 4,
+        "class": "sciences"
+      },
+      "department": {
+        "name": "medical",
+        "color": "blue",
+        "icon": "mdi-medical-bag"
+      }
+    }
+  ]
+}

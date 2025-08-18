@@ -12,7 +12,6 @@ export default defineConfig({
   },
   plugins: [
     vue(),
-    vueDevTools(),
     visualizer({
       filename: 'dist/bundle-analysis.html',
       open: true,

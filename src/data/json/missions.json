@@ -1,0 +1,22 @@
+{
+  "missions": [
+    {
+      "id": "encounter-at-farpoint",
+      "title": "Encounter at Farpoint",
+      "objective": "Make contact with the administration at Far Point Stations.",
+      "location": "Deneb IV",
+      "date": "2364-01-01T00:00:00.000Z",
+      "status": "active",
+      "priority": "high"
+    },
+    {
+      "id": "repair-communications-array",
+      "title": "Repair Communications Array",
+      "objective": "The communications array at the edge of the system has been damaged. Repair it to restore communications.",
+      "location": "System Edge",
+      "date": "2364-01-01T00:00:00.000Z",
+      "status": "active",
+      "priority": "medium"
+    }
+  ]
+}

@@ -1,0 +1,117 @@
+{
+  "rankSystems": {
+    "starfleet": [
+      {
+        "id": "civilian",
+        "name": "Civilian",
+        "title": "Civ",
+        "value": 0,
+        "class": "civilian"
+      },
+      {
+        "id": "ensign",
+        "name": "Ensign",
+        "title": "Ens",
+        "value": 1,
+        "class": "officer"
+      },
+      {
+        "id": "chief-petty-officer",
+        "name": "Chief Petty Officer",
+        "title": "CPO",
+        "value": 1,
+        "class": "enlisted"
+      },
+      {
+        "id": "lieutenant-jg",
+        "name": "Lieutenant (Junior Grade)",
+        "title": "LtJG",
+        "value": 1.5,
+        "class": "officer"
+      },
+      {
+        "id": "lieutenant",
+        "name": "Lieutenant",
+        "title": "Lt",
+        "value": 2,
+        "class": "officer"
+      },
+      {
+        "id": "lieutenant-commander",
+        "name": "Lieutenant Commander",
+        "title": "LtCmdr",
+        "value": 2.5,
+        "class": "officer"
+      },
+      {
+        "id": "commander",
+        "name": "Commander",
+        "title": "Cmdr",
+        "value": 3,
+        "class": "officer"
+      },
+      {
+        "id": "captain",
+        "name": "Captain",
+        "title": "Captain",
+        "value": 4,
+        "class": "officer"
+      },
+      {
+        "id": "admiral",
+        "name": "Admiral",
+        "title": "Admiral",
+        "value": 6,
+        "class": "flag"
+      }
+    ],
+    "klingon": [
+      {
+        "id": "general",
+        "name": "General",
+        "title": "General",
+        "value": 5,
+        "class": "military"
+      },
+      {
+        "id": "chancellor",
+        "name": "Chancellor",
+        "title": "Chancellor",
+        "value": 5,
+        "class": "political"
+      }
+    ],
+    "bajoran": [
+      {
+        "id": "kai",
+        "name": "Kai",
+        "title": "Kai",
+        "value": 0,
+        "class": "religious"
+      },
+      {
+        "id": "major",
+        "name": "Major",
+        "title": "Major",
+        "value": 3,
+        "class": "militia"
+      }
+    ],
+    "cardassian": [
+      {
+        "id": "gul",
+        "name": "Gul",
+        "title": "Gul",
+        "value": 3,
+        "class": "military"
+      },
+      {
+        "id": "legate",
+        "name": "Legate",
+        "title": "Legate",
+        "value": 4,
+        "class": "military"
+      }
+    ]
+  }
+}

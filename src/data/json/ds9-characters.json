@@ -1,0 +1,124 @@
+{
+  "ds9Characters": [
+    {
+      "id": "benjamin-sisko",
+      "name": "Benjamin Sisko",
+      "species": {
+        "name": "Human",
+        "type": "Species",
+        "origin": "Earth"
+      },
+      "rank": {
+        "name": "Captain",
+        "title": "Captain",
+        "value": 4,
+        "class": "officer"
+      },
+      "department": {
+        "name": "command",
+        "color": "red-darken-2",
+        "icon": "mdi-account-multiple"
+      }
+    },
+    {
+      "id": "kira-nerys",
+      "name": "Kira Nerys",
+      "species": {
+        "name": "Bajoran",
+        "type": "Species",
+        "origin": "Bajor"
+      },
+      "rank": {
+        "name": "Major",
+        "title": "Major",
+        "value": 3,
+        "class": "militia"
+      },
+      "department": {
+        "name": "command",
+        "color": "red-darken-2",
+        "icon": "mdi-account-multiple"
+      }
+    },
+    {
+      "id": "jadzia-dax",
+      "name": "Jadzia Dax",
+      "species": {
+        "name": "Trill",
+        "type": "Species",
+        "origin": "Trill"
+      },
+      "rank": {
+        "name": "Lieutenant Commander",
+        "title": "LtCmdr",
+        "value": 2.5,
+        "class": "officer"
+      },
+      "department": {
+        "name": "science",
+        "color": "blue-darken-2",
+        "icon": "mdi-flask"
+      }
+    },
+    {
+      "id": "julian-bashir",
+      "name": "Julian Bashir",
+      "species": {
+        "name": "Human",
+        "type": "Species",
+        "origin": "Earth"
+      },
+      "rank": {
+        "name": "Lieutenant",
+        "title": "Lt",
+        "value": 2,
+        "class": "officer"
+      },
+      "department": {
+        "name": "medical",
+        "color": "teal-darken-2",
+        "icon": "mdi-heart-pulse"
+      }
+    },
+    {
+      "id": "miles-obrien",
+      "name": "Miles O'Brien",
+      "species": {
+        "name": "Human",
+        "type": "Species",
+        "origin": "Earth"
+      },
+      "rank": {
+        "name": "Chief Petty Officer",
+        "title": "CPO",
+        "value": 1,
+        "class": "enlisted"
+      },
+      "department": {
+        "name": "engineering",
+        "color": "yellow-darken-2",
+        "icon": "mdi-tools"
+      }
+    },
+    {
+      "id": "worf",
+      "name": "Worf",
+      "species": {
+        "name": "Klingon",
+        "type": "Species",
+        "origin": "Qo'noS"
+      },
+      "rank": {
+        "name": "Lieutenant",
+        "title": "Lt",
+        "value": 2,
+        "class": "officer"
+      },
+      "department": {
+        "name": "security",
+        "color": "warning",
+        "icon": "mdi-security"
+      }
+    }
+  ]
+}

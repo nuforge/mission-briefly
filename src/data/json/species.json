@@ -1,0 +1,70 @@
+{
+  "species": [
+    {
+      "id": "human",
+      "name": "Human",
+      "type": "Species",
+      "origin": "Earth"
+    },
+    {
+      "id": "android",
+      "name": "Android",
+      "type": "Species",
+      "origin": "Omicron Theta"
+    },
+    {
+      "id": "betazoid",
+      "name": "Betazoid",
+      "type": "Species",
+      "origin": "Betazed"
+    },
+    {
+      "id": "klingon",
+      "name": "Klingon",
+      "type": "Species",
+      "origin": "Qo'noS"
+    },
+    {
+      "id": "bajoran",
+      "name": "Bajoran",
+      "type": "Species",
+      "origin": "Bajor"
+    },
+    {
+      "id": "cardassian",
+      "name": "Cardassian",
+      "type": "Species",
+      "origin": "Cardassia Prime"
+    },
+    {
+      "id": "trill",
+      "name": "Trill",
+      "type": "Species",
+      "origin": "Trill"
+    },
+    {
+      "id": "ferengi",
+      "name": "Ferengi",
+      "type": "Species",
+      "origin": "Ferenginar"
+    },
+    {
+      "id": "el-aurian",
+      "name": "El-Aurian",
+      "type": "Species",
+      "origin": "El-Aurian System"
+    },
+    {
+      "id": "vorta",
+      "name": "Vorta",
+      "type": "Species",
+      "origin": "Gamma Quadrant"
+    },
+    {
+      "id": "lurian",
+      "name": "Lurian",
+      "type": "Species",
+      "origin": "Luria"
+    }
+  ]
+}

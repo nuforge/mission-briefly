@@ -1,0 +1,40 @@
+{
+  "departments": [
+    {
+      "id": "command",
+      "name": "Command",
+      "color": "red-darken-2",
+      "icon": "mdi-account-multiple"
+    },
+    {
+      "id": "operations",
+      "name": "Operations",
+      "color": "yellow-darken-2",
+      "icon": "mdi-cog"
+    },
+    {
+      "id": "science",
+      "name": "Science",
+      "color": "blue-darken-2",
+      "icon": "mdi-flask"
+    },
+    {
+      "id": "medical",
+      "name": "Medical",
+      "color": "teal-darken-2",
+      "icon": "mdi-heart-pulse"
+    },
+    {
+      "id": "security",
+      "name": "Security",
+      "color": "warning",
+      "icon": "mdi-security"
+    },
+    {
+      "id": "engineering",
+      "name": "Engineering",
+      "color": "yellow-darken-2",
+      "icon": "mdi-tools"
+    }
+  ]
+}

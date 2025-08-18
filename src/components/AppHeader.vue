@@ -13,6 +13,10 @@ const toggleDrawer = () => {
     <template v-slot:prepend>
       <v-app-bar-nav-icon @click="toggleDrawer"></v-app-bar-nav-icon>
     </template>
-    <v-app-bar-title><v-router to="/">Mission Briefly</v-router></v-app-bar-title>
+    <v-app-bar-title>
+      <router-link to="/" style="text-decoration: none; color: inherit;">
+        Mission Briefly
+      </router-link>
+    </v-app-bar-title>
   </v-app-bar>
 </template>

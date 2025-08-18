@@ -1,0 +1,62 @@
+{
+  "ships": [
+    {
+      "id": "uss-enterprise-d",
+      "name": "USS Enterprise",
+      "type": "Galaxy-class",
+      "registry": "NCC-1701-D",
+      "crew": [
+        "jean-luc-picard",
+        "william-riker",
+        "beverly-crusher",
+        "data",
+        "geordi-la-forge",
+        "deanna-troi",
+        "worf"
+      ],
+      "roles": {
+        "captain": "jean-luc-picard",
+        "firstOfficer": "william-riker"
+      }
+    },
+    {
+      "id": "uss-enterprise-e",
+      "name": "USS Enterprise E",
+      "type": "Sovereign-class",
+      "registry": "NCC-1701-E",
+      "crew": [
+        "jean-luc-picard",
+        "william-riker",
+        "beverly-crusher",
+        "data",
+        "geordi-la-forge",
+        "deanna-troi",
+        "worf"
+      ],
+      "roles": {}
+    },
+    {
+      "id": "uss-defiant",
+      "name": "USS Defiant",
+      "type": "Defiant-class",
+      "registry": "NX-74205",
+      "crew": [
+        "benjamin-sisko",
+        "kira-nerys",
+        "jadzia-dax",
+        "julian-bashir",
+        "miles-obrien",
+        "worf"
+      ],
+      "roles": {}
+    },
+    {
+      "id": "uss-voyager",
+      "name": "USS Voyager",
+      "type": "Intrepid-class",
+      "registry": "NCC-74656",
+      "crew": [],
+      "roles": {}
+    }
+  ]
+}

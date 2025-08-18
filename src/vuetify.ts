@@ -28,6 +28,8 @@ import {
   VListItemTitle,
   VNavigationDrawer,
   VAppBar,
+  VAppBarNavIcon,
+  VAppBarTitle,
   VToolbar,
   VToolbarTitle,
   VSpacer,
@@ -38,6 +40,9 @@ import {
   VLabel,
   VTooltip,
   VProgressLinear,
+  VProgressCircular,
+  VResponsive,
+  VExpandTransition,
 } from 'vuetify/components'
 
 // Import only directives we use
@@ -63,6 +68,8 @@ const vuetify = createVuetify({
     VListItemTitle,
     VNavigationDrawer,
     VAppBar,
+    VAppBarNavIcon,
+    VAppBarTitle,
     VToolbar,
     VToolbarTitle,
     VSpacer,
@@ -73,6 +80,9 @@ const vuetify = createVuetify({
     VLabel,
     VTooltip,
     VProgressLinear,
+    VProgressCircular,
+    VResponsive,
+    VExpandTransition,
   },
   directives: {
     Ripple,
