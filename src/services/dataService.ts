@@ -336,6 +336,21 @@ class DataService {
       // Override the auto-generated ID with the JSON ID
       ship.overrideId(shipData.id)
 
+      // Set position from JSON data
+      if (shipData.position) {
+        ;(ship as any).position = shipData.position
+      }
+
+      // Set status from JSON data
+      if (shipData.status) {
+        ;(ship as any).status = shipData.status
+      }
+
+      // Set mission from JSON data
+      if (shipData.mission) {
+        ;(ship as any).mission = shipData.mission
+      }
+
       // Add crew members
       const crewMembers = shipData.crew
         .map((charId) => characters.find((c) => c.id === charId))

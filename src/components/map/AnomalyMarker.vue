@@ -1,5 +1,6 @@
 <template>
-    <g class="anomaly-marker" @click="$emit('click', anomaly)">
+    <g class="anomaly-marker" :data-entity-id="anomaly.id" @click="$emit('click', anomaly)"
+        @mouseenter="handleMouseEnter" @mouseleave="handleMouseLeave">
         <!-- Anomaly Effect Area (background) -->
         <circle :cx="position.x" :cy="position.y" :r="effectRadius" :fill="anomaly.getMapColor()" :opacity="0.1"
             class="anomaly-effect-area" />
@@ -64,26 +65,25 @@
 
         <!-- Tooltip -->
         <g v-if="showTooltip" class="anomaly-tooltip">
-            <rect :x="position.x + effectRadius + 10" :y="position.y - 40" width="180" height="80"
-                fill="rgba(0, 0, 0, 0.9)" stroke="#555" stroke-width="1" rx="4" />
-            <text :x="position.x + effectRadius + 15" :y="position.y - 25" fill="white" font-size="10"
-                font-weight="bold">
+            <rect :x="tooltipPosition.x" :y="tooltipPosition.y" width="180" height="80" fill="rgba(0, 0, 0, 0.95)"
+                stroke="rgba(255, 255, 255, 0.3)" stroke-width="1" rx="6" />
+            <text :x="tooltipPosition.x + 8" :y="tooltipPosition.y + 15" fill="white" font-size="10" font-weight="bold">
                 {{ anomaly.name }}
             </text>
-            <text :x="position.x + effectRadius + 15" :y="position.y - 15" fill="#ccc" font-size="9">
+            <text :x="tooltipPosition.x + 8" :y="tooltipPosition.y + 27" fill="#ccc" font-size="9">
                 Type: {{ anomaly.anomalyType }} • {{ anomaly.severity }}
             </text>
-            <text :x="position.x + effectRadius + 15" :y="position.y - 5" fill="#ccc" font-size="9">
+            <text :x="tooltipPosition.x + 8" :y="tooltipPosition.y + 39" fill="#ccc" font-size="9">
                 Radius: {{ anomaly.radius.toFixed(1) }} AU
             </text>
-            <text :x="position.x + effectRadius + 15" :y="position.y + 5" fill="#ccc" font-size="9">
+            <text :x="tooltipPosition.x + 8" :y="tooltipPosition.y + 51" fill="#ccc" font-size="9">
                 Threat: {{ anomaly.threatLevel }}/10
             </text>
-            <text v-if="anomaly.discoveredBy" :x="position.x + effectRadius + 15" :y="position.y + 15" fill="#ccc"
+            <text v-if="anomaly.discoveredBy" :x="tooltipPosition.x + 8" :y="tooltipPosition.y + 63" fill="#ccc"
                 font-size="8">
                 Discovered by: {{ getDiscovererName() }}
             </text>
-            <text :x="position.x + effectRadius + 15" :y="position.y + 25" fill="#ccc" font-size="8">
+            <text :x="tooltipPosition.x + 8" :y="tooltipPosition.y + 75" fill="#ccc" font-size="8">
                 Status: {{ anomaly.isActive ? 'Active' : 'Inactive' }}
             </text>
         </g>
@@ -98,11 +98,15 @@ interface Props {
     anomaly: Anomaly
     isSelected?: boolean
     scale?: number
+    viewportWidth?: number
+    viewportHeight?: number
 }
 
 const props = withDefaults(defineProps<Props>(), {
     isSelected: false,
-    scale: 50 // pixels per AU
+    scale: 50, // pixels per AU
+    viewportWidth: 800,
+    viewportHeight: 600
 })
 
 // Local state
@@ -122,6 +126,32 @@ const coreRadius = computed(() => {
     const baseSize = 6
     const severityMultiplier = (props.anomaly as any).getSeverityMultiplier()
     return baseSize * severityMultiplier
+})
+
+const tooltipPosition = computed(() => {
+    const tooltipWidth = 180
+    const tooltipHeight = 80
+    const margin = 10
+
+    // Default position (to the right of the anomaly)
+    let x = position.value.x + effectRadius.value + margin
+    let y = position.value.y - 40
+
+    // If too far right, position to the left
+    if (x + tooltipWidth > props.viewportWidth) {
+        x = position.value.x - effectRadius.value - tooltipWidth - margin
+    }
+
+    // If too far down, position above
+    if (y + tooltipHeight > props.viewportHeight) {
+        y = position.value.y - effectRadius.value - tooltipHeight - margin
+    }
+
+    // Ensure minimum bounds
+    x = Math.max(margin, x)
+    y = Math.max(margin, y)
+
+    return { x, y }
 })
 
 const labelColor = computed(() => {
@@ -145,10 +175,22 @@ function getDiscovererName(): string {
     return discoveredBy || 'Unknown'
 }
 
+function handleMouseEnter() {
+    showTooltip.value = true
+    emit('mouseenter', props.anomaly)
+}
+
+function handleMouseLeave() {
+    showTooltip.value = false
+    emit('mouseleave', props.anomaly)
+}
+
 // Emits
-defineEmits<{
+const emit = defineEmits<{
     click: [anomaly: Anomaly]
     'show-details': [anomaly: Anomaly]
+    mouseenter: [anomaly: Anomaly]
+    mouseleave: [anomaly: Anomaly]
 }>()
 </script>
 
