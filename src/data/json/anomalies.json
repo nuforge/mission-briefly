@@ -1,0 +1,93 @@
+{
+  "anomalies": [
+    {
+      "id": "temporal-distortion-alpha",
+      "name": "Temporal Distortion Field Alpha",
+      "type": "temporal",
+      "severity": "major",
+      "position": { "x": -3.5, "y": 2.8, "z": -0.6 },
+      "radius": 0.8,
+      "description": "A stable temporal anomaly causing time dilation effects. Ships entering the field experience time at 0.7 normal rate.",
+      "isActive": true,
+      "discoveredBy": "data",
+      "discoveryDate": "2364-01-01T08:30:00.000Z",
+      "effects": ["time dilation", "chronometer interference", "warp field instability"],
+      "requiresSpecialEquipment": true,
+      "threatLevel": 6
+    },
+    {
+      "id": "subspace-rift-beta",
+      "name": "Subspace Rift Beta",
+      "type": "subspace",
+      "severity": "critical",
+      "position": { "x": 5.2, "y": -3.1, "z": 1.2 },
+      "radius": 1.5,
+      "description": "Unstable subspace rift periodically emitting dangerous tetryon radiation. Approach with extreme caution.",
+      "isActive": true,
+      "discoveredBy": "geordi-la-forge",
+      "discoveryDate": "2364-01-01T14:20:00.000Z",
+      "effects": ["tetryon radiation", "subspace interference", "navigation hazard"],
+      "requiresSpecialEquipment": true,
+      "threatLevel": 9
+    },
+    {
+      "id": "gravitational-anomaly-gamma",
+      "name": "Gravitational Well Gamma",
+      "type": "gravitational",
+      "severity": "moderate",
+      "position": { "x": 1.8, "y": 4.2, "z": -0.3 },
+      "radius": 2.1,
+      "description": "Localized gravitational distortion creating artificial gravity well. May be remnant of collapsed micro black hole.",
+      "isActive": true,
+      "discoveredBy": "data",
+      "discoveryDate": "2364-01-01T11:45:00.000Z",
+      "effects": ["gravitational pull", "trajectory alteration", "structural stress"],
+      "requiresSpecialEquipment": false,
+      "threatLevel": 4
+    },
+    {
+      "id": "energy-cascade-delta",
+      "name": "Energy Cascade Delta",
+      "type": "energy",
+      "severity": "minor",
+      "position": { "x": -1.5, "y": -1.8, "z": 0.9 },
+      "radius": 0.5,
+      "description": "Intermittent energy discharge phenomenon. Sensors detect exotic particle emissions every 3.7 hours.",
+      "isActive": false,
+      "discoveredBy": "data",
+      "discoveryDate": "2364-01-01T16:12:00.000Z",
+      "effects": ["EM interference", "sensor disruption", "minor shield drain"],
+      "requiresSpecialEquipment": false,
+      "threatLevel": 2
+    },
+    {
+      "id": "quantum-flux-epsilon",
+      "name": "Quantum Flux Field Epsilon",
+      "type": "quantum",
+      "severity": "major",
+      "position": { "x": 6.8, "y": 0.5, "z": -1.1 },
+      "radius": 1.0,
+      "description": "Quantum field fluctuations causing reality distortions. Multiple possible outcomes exist simultaneously within the field.",
+      "isActive": true,
+      "discoveredBy": "data",
+      "discoveryDate": "2364-01-01T09:55:00.000Z",
+      "effects": ["quantum uncertainty", "sensor confusion", "phase variance"],
+      "requiresSpecialEquipment": true,
+      "threatLevel": 7
+    },
+    {
+      "id": "unknown-signature-zeta",
+      "name": "Unknown Energy Signature Zeta",
+      "type": "unknown",
+      "severity": "moderate",
+      "position": { "x": -6.2, "y": -0.8, "z": 0.4 },
+      "radius": 0.7,
+      "description": "Unidentified energy pattern unlike anything in Starfleet databases. Requires further investigation.",
+      "isActive": true,
+      "discoveryDate": "2364-01-01T13:28:00.000Z",
+      "effects": ["unknown energy emissions", "sensor interference"],
+      "requiresSpecialEquipment": true,
+      "threatLevel": 5
+    }
+  ]
+}

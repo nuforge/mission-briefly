@@ -1,0 +1,13 @@
+{
+  "solarSystems": [
+    {
+      "id": "deneb-system",
+      "name": "Deneb System",
+      "starType": "A-type main sequence",
+      "coordinates": { "x": 0, "y": 0, "z": 0 },
+      "description": "The Deneb system, home to Farpoint Station and the first official mission of the USS Enterprise-D. Rich in resources but containing several spatial anomalies requiring careful navigation.",
+      "isExplored": true,
+      "threatLevel": 3
+    }
+  ]
+}

@@ -4,6 +4,9 @@ import Mission from '@/game/mission'
 import Species from '@/game/species'
 import Rank from '@/game/rank'
 import Department from '@/game/department'
+import Planet from '@/game/planet'
+import Anomaly from '@/game/anomaly'
+import SolarSystem from '@/game/solarSystem'
 
 /**
  * Data service layer for API-like data loading
@@ -59,6 +62,9 @@ interface ShipData {
   name: string
   type: string
   registry: string
+  position?: { x: number; y: number; z: number }
+  status?: string
+  mission?: string | null
   crew: string[]
   roles?: { [key: string]: string }
 }
@@ -692,6 +698,177 @@ class DataService {
         timestamp: new Date().toISOString(),
       }
     }
+  }
+
+  /**
+   * Load planet data
+   */
+  async loadPlanets(): Promise<APIResponse<Planet[]>> {
+    try {
+      await this.simulateNetworkDelay()
+
+      if (this.isLocalMode) {
+        // Local mode - import JSON data
+        const { default: planetsData } = await import('@/data/json/planets.json')
+        const planets = this.transformPlanetData(planetsData.planets)
+
+        return {
+          data: planets,
+          status: 'success',
+          timestamp: new Date().toISOString(),
+        }
+      } else {
+        // API mode - fetch from external API
+        const response = await fetch(`${this.baseUrl}/api/planets`)
+        const apiData = await response.json()
+        const planets = this.transformPlanetData(apiData.planets)
+
+        return {
+          data: planets,
+          status: 'success',
+          timestamp: new Date().toISOString(),
+        }
+      }
+    } catch (error) {
+      console.error('Failed to load planets:', error)
+      return {
+        data: [],
+        status: 'error',
+        message: error instanceof Error ? error.message : 'Unknown error',
+        timestamp: new Date().toISOString(),
+      }
+    }
+  }
+
+  /**
+   * Load anomaly data
+   */
+  async loadAnomalies(): Promise<APIResponse<Anomaly[]>> {
+    try {
+      await this.simulateNetworkDelay()
+
+      if (this.isLocalMode) {
+        // Local mode - import JSON data
+        const { default: anomaliesData } = await import('@/data/json/anomalies.json')
+        const anomalies = this.transformAnomalyData(anomaliesData.anomalies)
+
+        return {
+          data: anomalies,
+          status: 'success',
+          timestamp: new Date().toISOString(),
+        }
+      } else {
+        // API mode - fetch from external API
+        const response = await fetch(`${this.baseUrl}/api/anomalies`)
+        const apiData = await response.json()
+        const anomalies = this.transformAnomalyData(apiData.anomalies)
+
+        return {
+          data: anomalies,
+          status: 'success',
+          timestamp: new Date().toISOString(),
+        }
+      }
+    } catch (error) {
+      console.error('Failed to load anomalies:', error)
+      return {
+        data: [],
+        status: 'error',
+        message: error instanceof Error ? error.message : 'Unknown error',
+        timestamp: new Date().toISOString(),
+      }
+    }
+  }
+
+  /**
+   * Load solar system data
+   */
+  async loadSolarSystems(): Promise<APIResponse<SolarSystem[]>> {
+    try {
+      await this.simulateNetworkDelay()
+
+      if (this.isLocalMode) {
+        // Local mode - import JSON data
+        const { default: systemsData } = await import('@/data/json/solar-systems.json')
+        const [planetsResponse, anomaliesResponse] = await Promise.all([
+          this.loadPlanets(),
+          this.loadAnomalies(),
+        ])
+
+        const solarSystems = this.transformSolarSystemData(
+          systemsData.solarSystems,
+          planetsResponse.data,
+          anomaliesResponse.data,
+        )
+
+        return {
+          data: solarSystems,
+          status: 'success',
+          timestamp: new Date().toISOString(),
+        }
+      } else {
+        // API mode - fetch from external API
+        const response = await fetch(`${this.baseUrl}/api/solar-systems`)
+        const apiData = await response.json()
+        const [planetsResponse, anomaliesResponse] = await Promise.all([
+          this.loadPlanets(),
+          this.loadAnomalies(),
+        ])
+
+        const solarSystems = this.transformSolarSystemData(
+          apiData.solarSystems,
+          planetsResponse.data,
+          anomaliesResponse.data,
+        )
+
+        return {
+          data: solarSystems,
+          status: 'success',
+          timestamp: new Date().toISOString(),
+        }
+      }
+    } catch (error) {
+      console.error('Failed to load solar systems:', error)
+      return {
+        data: [],
+        status: 'error',
+        message: error instanceof Error ? error.message : 'Unknown error',
+        timestamp: new Date().toISOString(),
+      }
+    }
+  }
+
+  /**
+   * Transform planet JSON data to Planet instances
+   */
+  private transformPlanetData(planetsData: any[]): Planet[] {
+    return planetsData.map((planetData) => new Planet(planetData))
+  }
+
+  /**
+   * Transform anomaly JSON data to Anomaly instances
+   */
+  private transformAnomalyData(anomaliesData: any[]): Anomaly[] {
+    return anomaliesData.map((anomalyData) => new Anomaly(anomalyData))
+  }
+
+  /**
+   * Transform solar system JSON data to SolarSystem instances
+   */
+  private transformSolarSystemData(
+    systemsData: any[],
+    planets: Planet[],
+    anomalies: Anomaly[],
+  ): SolarSystem[] {
+    return systemsData.map((systemData) => {
+      // For now, assign all planets and anomalies to the first system
+      // In a real application, you'd filter by system ID
+      return new SolarSystem({
+        ...systemData,
+        planets,
+        anomalies,
+      })
+    })
   }
 
   /**

@@ -5,6 +5,9 @@
       "name": "USS Enterprise",
       "type": "Galaxy-class",
       "registry": "NCC-1701-D",
+      "position": { "x": -2.1, "y": 1.9, "z": 0.2 },
+      "status": "active",
+      "mission": "encounter-at-farpoint",
       "crew": [
         "jean-luc-picard",
         "william-riker",
@@ -24,6 +27,9 @@
       "name": "USS Enterprise E",
       "type": "Sovereign-class",
       "registry": "NCC-1701-E",
+      "position": { "x": 0.0, "y": 0.0, "z": 0.0 },
+      "status": "docked",
+      "mission": null,
       "crew": [
         "jean-luc-picard",
         "william-riker",
@@ -40,6 +46,9 @@
       "name": "USS Defiant",
       "type": "Defiant-class",
       "registry": "NX-74205",
+      "position": { "x": 8.3, "y": -2.0, "z": 0.9 },
+      "status": "active",
+      "mission": "repair-communications-array",
       "crew": [
         "benjamin-sisko",
         "kira-nerys",
@@ -55,6 +64,9 @@
       "name": "USS Voyager",
       "type": "Intrepid-class",
       "registry": "NCC-74656",
+      "position": { "x": -5.2, "y": 3.1, "z": -0.8 },
+      "status": "exploring",
+      "mission": null,
       "crew": [],
       "roles": {}
     }

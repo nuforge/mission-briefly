@@ -48,6 +48,7 @@ const characters = computed(() => gameStore.characters.slice(0, 10)) // Limit to
 
     <!-- Fleet Section -->
     <v-list-item prepend-icon="mdi-rocket" title="Fleet Overview" to="/fleet" color="primary" />
+    <v-list-item prepend-icon="mdi-solar-system" title="Solar System Map" to="/system" color="primary" />
     <v-label @click="state.toggleNavigationSection('ships')" style="cursor: pointer;">
       <v-icon :icon="state.navigationExpanded?.ships ? 'mdi-chevron-down' : 'mdi-chevron-right'" size="small" />
       Ships
@@ -96,4 +97,3 @@ const characters = computed(() => gameStore.characters.slice(0, 10)) // Limit to
     <v-list-item prepend-icon="mdi-information" title="About" to="/about" color="primary" />
   </v-navigation-drawer>
 </template>
-

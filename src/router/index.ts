@@ -35,6 +35,13 @@ const router = createRouter({
       props: true,
       meta: { title: 'Ship Details' },
     },
+    // Solar System routes
+    {
+      path: '/system',
+      name: 'solar-system',
+      component: () => import('../views/SolarSystemView.vue'),
+      meta: { title: 'Solar System Map' },
+    },
     // Personnel routes
     {
       path: '/crew',

@@ -56,6 +56,13 @@ import {
   VSelect,
   VDataTable,
   VBtnToggle,
+  VBtnGroup,
+  VMenu,
+  VSwitch,
+  VTabs,
+  VTab,
+  VWindow,
+  VWindowItem,
 } from 'vuetify/components'
 
 // Import only directives we use
@@ -109,6 +116,13 @@ const vuetify = createVuetify({
     VSelect,
     VDataTable,
     VBtnToggle,
+    VBtnGroup,
+    VMenu,
+    VSwitch,
+    VTabs,
+    VTab,
+    VWindow,
+    VWindowItem,
   },
   directives: {
     Ripple,
